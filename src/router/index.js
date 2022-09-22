@@ -9,6 +9,7 @@ const router = new VueRouter({
   routes: [
     {
       path: '/',
+      name: 'Home',
       redirect: 'dashboard/dashboard',
       component: () => import('@/layouts/Layout'),
       children: [

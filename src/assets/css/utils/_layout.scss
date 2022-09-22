@@ -1,8 +1,18 @@
-.mini-sidebar {
-  .logo-text {
-    display: none;
-  }
+// .mini-sidebar {
+//   .logo-text {
+//     display: none;
+//   }
+// }
+.header-img {
+    background: url(/src/assets/navbar-bg-04.png) no-repeat left center;
+    background-size: cover;
 }
+
+  .logo-text {
+    img {
+        height: 50px;
+    }
+  }
 
 .v-application--is-ltr .v-list-item__icon:first-child {
   margin-right: 10px;

@@ -1,7 +1,7 @@
 <template>
     <v-navigation-drawer v-model="Sidebar_drawer" app clipped :dark="SidebarColor !== 'white'" :color="SidebarColor"
         :right="$vuetify.rtl" mini-variant-width="70" :expand-on-hover="expandOnHover" mobile-break-point="960"
-        id="main-sidebar">
+        id="main-sidebar" v-if="false">
         <v-list dense nav>
             <!---USer Area -->
             <v-list-item two-line class="px-0">

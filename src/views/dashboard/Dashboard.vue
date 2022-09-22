@@ -1,89 +1,66 @@
 <template>
-    <v-container fluid class="down-top-padding">
+    <v-container>
         <v-row>
-            <v-col cols="12" lg="8">
+            <v-col cols="12" md="4" sm="2">
                 <v-card>
+                    <v-img src="../../assets/img01.jpg"></v-img>
                     <v-card-text class="pa-5">
                         <div class="d-sm-flex align-center">
-                            <div>
-                                <h3 class="title blue-grey--text text--darken-2 font-weight-regular">Sales Overview</h3>
-                                <h6 class="subtitle-2 font-weight-light">Ample Admin Vs Pixel Admin</h6>
-                            </div>
-                            <div class="ml-auto">
-                                <div class="d-flex align-center">
-                                    <div class="d-flex align-center px-2">
-                                        <span class="success--text">
-                                            <span class="overline">
-                                                <i class="mdi mdi-brightness-1 mr-2"></i>
-                                            </span>
-                                            <span class="font-weight-regular">Ample</span>
-                                        </span>
-                                    </div>
-                                    <div class="d-flex align-center px-2">
-                                        <span class="info--text">
-                                            <span class="overline">
-                                                <i class="mdi mdi-brightness-1 mr-2"></i>
-                                            </span>
-                                            <span class="font-weight-regular">Pixel</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-9">
-                            <v-sparkline type="bar" :fill="fill2" height="80px" :gradient="gradient2"
-                                :line-width="width2" :padding="padding2" :smooth="radius2 || false" :value="value2"
-                                auto-draw></v-sparkline>
+                            <h3 class="title blue-grey--text text--darken-2 font-weight-bold">課程訓練管理模組</h3>
                         </div>
                     </v-card-text>
                 </v-card>
             </v-col>
-            <v-col cols="12" lg="4">
-        <v-card>
-          <v-card-text class="pa-5">
-            <h3 class="title blue-grey--text text--darken-2 font-weight-regular">Our Visitors</h3>
-            <h6 class="subtitle-2 font-weight-light">Different Devices Used to Visit</h6>
-            <div class="pb-6">
-              <v-sparkline
-                :fill="fill"
-                height="145px"
-                :gradient="gradient"
-                :line-width="width"
-                :padding="padding"
-                :smooth="radius || false"
-                :value="value"
-                auto-draw
-              ></v-sparkline>
-            </div>
-            <div class="d-flex align-center justify-center border-top pt-4 pb-2">
-              <div class="d-flex align-center px-3">
-                <span class="info--text">
-                  <span class="overline">
-                    <i class="mdi mdi-brightness-1 mr-2"></i>
-                  </span>
-                  <span class="font-weight-regular">Mobile</span>
-                </span>
-              </div>
-              <div class="d-flex align-center px-3">
-                <span class="deep-purple--text text--lighten-1">
-                  <span class="overline">
-                    <i class="mdi mdi-brightness-1 mr-2"></i>
-                  </span>
-                  <span class="font-weight-regular">Desktop</span>
-                </span>
-              </div>
-              <div class="d-flex align-center px-3">
-                <span class="success--text">
-                  <span class="overline">
-                    <i class="mdi mdi-brightness-1 mr-2"></i>
-                  </span>
-                  <span class="font-weight-regular">Tablet</span>
-                </span>
-              </div>
-            </div>
-          </v-card-text>
-        </v-card>
-      </v-col>
+            <v-col cols="12" md="4" sm="2">
+                <v-card>
+                    <v-img src="../../assets/img02.jpg"></v-img>
+                    <v-card-text class="pa-5">
+                        <div class="d-sm-flex align-center">
+                            <h3 class="title blue-grey--text text--darken-2 font-weight-bold">專家資料庫</h3>
+                        </div>
+                    </v-card-text>
+                </v-card>
+            </v-col>
+            <v-col cols="12" md="4" sm="2">
+                <v-card>
+                    <v-img src="../../assets/img03.jpg"></v-img>
+                    <v-card-text class="pa-5">
+                        <div class="d-sm-flex align-center">
+                            <h3 class="title blue-grey--text text--darken-2 font-weight-bold">測驗題庫管理模組</h3>
+                        </div>
+                    </v-card-text>
+                </v-card>
+            </v-col>
+            <v-col cols="12" md="4" sm="2">
+                <v-card>
+                    <v-img src="../../assets/img04.jpg"></v-img>
+                    <v-card-text class="pa-5">
+                        <div class="d-sm-flex align-center">
+                            <h3 class="title blue-grey--text text--darken-2 font-weight-bold">產業創新知識庫</h3>
+                        </div>
+                    </v-card-text>
+                </v-card>
+            </v-col>
+            <v-col cols="12" md="4" sm="2">
+                <v-card>
+                    <v-img src="../../assets/img05.jpg"></v-img>
+                    <v-card-text class="pa-5">
+                        <div class="d-sm-flex align-center">
+                            <h3 class="title blue-grey--text text--darken-2 font-weight-bold">智慧商情模組</h3>
+                        </div>
+                    </v-card-text>
+                </v-card>
+            </v-col>
+            <v-col cols="12" md="4" sm="2">
+                <v-card>
+                    <v-img src="../../assets/img06.jpg"></v-img>
+                    <v-card-text class="pa-5">
+                        <div class="d-sm-flex align-center">
+                            <h3 class="title blue-grey--text text--darken-2 font-weight-bold">工作事項管理模組</h3>
+                        </div>
+                    </v-card-text>
+                </v-card>
+            </v-col>
         </v-row>
 
     </v-container>
