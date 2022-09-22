@@ -4,33 +4,45 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes: [
-    {
-      path: '/',
-      name: 'Home',
-      redirect: 'dashboard/dashboard',
-      component: () => import('@/layouts/Layout'),
-      children: [
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes: [
         {
-          name: 'About',
-          path: 'about',
-          component: () => import('@/views/About'),
-        },
-        {
-          name: 'Alert',
-          path: 'pages/alerts',
-          component: () => import('@/views/pages/Alerts'),
-        },
-        {
-          name: 'Dashboard',
-          path: 'dashboard/dashboard',
-          component: () => import('@/views/dashboard/Dashboard'),
-      },
-      ]
-    }
-  ]
+            path: '/',
+            name: 'Home',
+            meta: { title: '產品入口網' },
+            redirect: 'dashboard/dashboard',
+            component: () => import('@/layouts/Layout'),
+            children: [
+                {
+                    name: 'Knowledge',
+                    path: 'knowledge',
+                    meta: { title: '產業創新知識庫' },
+                    component: () => import('@/views/pages/Knowledge'),
+                },
+                {
+                    name: 'About',
+                    path: 'about',
+                    component: () => import('@/views/About'),
+                },
+                {
+                    name: 'Alert',
+                    path: 'pages/alerts',
+                    component: () => import('@/views/pages/Alerts'),
+                },
+                {
+                    name: 'Dashboard',
+                    path: 'dashboard/dashboard',
+                    meta: { title: '產品入口網' },
+                    component: () => import('@/views/dashboard/Dashboard'),
+                },
+            ]
+        }
+    ]
 })
 
+router.beforeEach((to, from, next) => {
+    window.document.title = to.meta.title;
+    next()
+});
 export default router

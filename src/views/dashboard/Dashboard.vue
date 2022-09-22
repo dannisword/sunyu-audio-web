@@ -2,14 +2,17 @@
     <v-container>
         <v-row>
             <v-col cols="12" md="4" sm="2" v-for="appItem in appItems" :key="appItem" text>
-                <v-card elevation="3" outlined>
-                    <v-img :src="appItem.imgUrl"></v-img>
-                    <v-card-text class="pa-5">
-                        <div class="d-sm-flex align-center">
-                            <h3 class="title blue-grey--text text--darken-2 font-weight-bold">{{appItem.title}}</h3>
-                        </div>
-                    </v-card-text>
-                </v-card>
+                <router-link :to="appItem.path" custom>
+                    <v-card elevation="3" outlined>
+                        <v-img :src="appItem.imgUrl"></v-img>
+                        <v-card-text class="pa-5">
+                            <div class="d-sm-flex align-center">
+                                <h3 class="title blue-grey--text text--darken-2 font-weight-bold">{{appItem.title}}</h3>
+                            </div>
+                        </v-card-text>
+                    </v-card>
+                </router-link>
+               
             </v-col>
         </v-row>
 
