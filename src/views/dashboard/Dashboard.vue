@@ -1,62 +1,12 @@
 <template>
     <v-container>
         <v-row>
-            <v-col cols="12" md="4" sm="2">
-                <v-card>
-                    <v-img src="../../assets/img01.jpg"></v-img>
+            <v-col cols="12" md="4" sm="2" v-for="appItem in appItems" :key="appItem" text>
+                <v-card elevation="3" outlined>
+                    <v-img :src="appItem.imgUrl"></v-img>
                     <v-card-text class="pa-5">
                         <div class="d-sm-flex align-center">
-                            <h3 class="title blue-grey--text text--darken-2 font-weight-bold">課程訓練管理模組</h3>
-                        </div>
-                    </v-card-text>
-                </v-card>
-            </v-col>
-            <v-col cols="12" md="4" sm="2">
-                <v-card>
-                    <v-img src="../../assets/img02.jpg"></v-img>
-                    <v-card-text class="pa-5">
-                        <div class="d-sm-flex align-center">
-                            <h3 class="title blue-grey--text text--darken-2 font-weight-bold">專家資料庫</h3>
-                        </div>
-                    </v-card-text>
-                </v-card>
-            </v-col>
-            <v-col cols="12" md="4" sm="2">
-                <v-card>
-                    <v-img src="../../assets/img03.jpg"></v-img>
-                    <v-card-text class="pa-5">
-                        <div class="d-sm-flex align-center">
-                            <h3 class="title blue-grey--text text--darken-2 font-weight-bold">測驗題庫管理模組</h3>
-                        </div>
-                    </v-card-text>
-                </v-card>
-            </v-col>
-            <v-col cols="12" md="4" sm="2">
-                <v-card>
-                    <v-img src="../../assets/img04.jpg"></v-img>
-                    <v-card-text class="pa-5">
-                        <div class="d-sm-flex align-center">
-                            <h3 class="title blue-grey--text text--darken-2 font-weight-bold">產業創新知識庫</h3>
-                        </div>
-                    </v-card-text>
-                </v-card>
-            </v-col>
-            <v-col cols="12" md="4" sm="2">
-                <v-card>
-                    <v-img src="../../assets/img05.jpg"></v-img>
-                    <v-card-text class="pa-5">
-                        <div class="d-sm-flex align-center">
-                            <h3 class="title blue-grey--text text--darken-2 font-weight-bold">智慧商情模組</h3>
-                        </div>
-                    </v-card-text>
-                </v-card>
-            </v-col>
-            <v-col cols="12" md="4" sm="2">
-                <v-card>
-                    <v-img src="../../assets/img06.jpg"></v-img>
-                    <v-card-text class="pa-5">
-                        <div class="d-sm-flex align-center">
-                            <h3 class="title blue-grey--text text--darken-2 font-weight-bold">工作事項管理模組</h3>
+                            <h3 class="title blue-grey--text text--darken-2 font-weight-bold">{{appItem.title}}</h3>
                         </div>
                     </v-card-text>
                 </v-card>
@@ -65,91 +15,44 @@
 
     </v-container>
 </template>
-  
-  
-<script>
-const gradients = [
-    ["#6c757d"],
-    ["#6c757d"],
-    ["#6c757d", "#6c757d", "#6c757d"],
-    ["#21c1d6", "21c1d6"],
-    ["#21c1d6", "#21c1d6", "#21c1d6"],
-    ["#21c1d6", "#21c1d6", "#21c1d6"]
-];
 
-const gradients2 = [
-    ["#1e88e5"],
-    ["#1e88e5"],
-    ["#1e88e5", "#1e88e5", "#1e88e5"],
-    ["#1e88e5", "#1e88e5"],
-    ["#1e88e5", "#1e88e5", "#1e88e5"],
-    ["#1e88e5", "#1e88e5", "#1e88e5"]
-];
+<script>
 
 export default {
     name: "BasicDashboard",
     data: () => ({
-        fill: true,
-        gradient: gradients[4],
-        gradients,
-        padding: 8,
-        radius: 50,
-        value: [0, 2, 5, 9, 5, 10, 3, 5, 1, 8, 2, 9, 0],
-        width: 1,
-
-        fill2: true,
-        gradient2: gradients2[4],
-        gradients2,
-        radius2: 0,
-        padding2: 0,
-        value2: [1, 2, 5, 9, 5, 10, 3, 5, 1, 8, 2, 9, 4],
-        width2: 4,
-        tasks: [
+        appItems: [
             {
-                done: false,
-                text: "Check emails of Mr.Shah"
+                path: "/training-class",
+                title: "課程訓練管理模組",
+                imgUrl: require('@/assets/img01.jpg'),
             },
             {
-                done: false,
-                text: "Give salary to employee"
-            }
-        ],
-        task: null,
-        selected: [2],
-        items: [
-            {
-                action: "15 min",
-                headline: "Brunch this weekend?",
-                title: "Ali Connors",
-                subtitle:
-                    "I'll be in your neighborhood doing errands this weekend. Do you want to hang out?"
+                path: "/professional-data",
+                title: "專家資料庫",
+                imgUrl: require('@/assets/img02.jpg'),
             },
             {
-                action: "2 hr",
-                headline: "Summer BBQ",
-                title: "me, Scrott, Jennifer",
-                subtitle: "Wish I could come, but I'm out of town this weekend."
+                path: "/quizzes",
+                title: "測驗題庫管理模組",
+                imgUrl: require('@/assets/img03.jpg'),
             },
             {
-                action: "6 hr",
-                headline: "Oui oui",
-                title: "Sandra Adams",
-                subtitle: "Do you have Paris recommendations? Have you ever been?"
+                path: "/knowledge",
+                title: "產業創新知識庫",
+                imgUrl: require('@/assets/img04.jpg'),
             },
             {
-                action: "12 hr",
-                headline: "Birthday gift",
-                title: "Trevor Hansen",
-                subtitle:
-                    "Have any ideas about what we should get Heidi for her birthday?"
+                path: "/know-how",
+                title: "智慧商情模組",
+                imgUrl: require('@/assets/img05.jpg'),
             },
             {
-                action: "18hr",
-                headline: "Recipe to try",
-                title: "Britta Holt",
-                subtitle:
-                    "We should eat this: Grate, Squash, Corn, and tomatillo Tacos."
-            }
+                path: "/wrok-management",
+                title: "工作事項管理模組",
+                imgUrl: require('@/assets/img06.jpg'),
+            },
+            
         ]
     }),
     computed: {
@@ -176,3 +79,10 @@ export default {
     }
 };
 </script>
+
+<style lang="scss">
+.theme--light .v-content {
+    background-color: #eef5f9;
+    height: 100vh;
+}
+</style>

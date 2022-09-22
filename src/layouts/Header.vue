@@ -12,7 +12,7 @@
         <v-spacer />
         <!---right part -->
         <div class="d-none d-sm-flex">
-            <v-btn v-for="link in userprofile" :key="link" text>
+            <v-btn color="grey darken-3" v-for="link in userprofile" :key="link" text>
                 {{ link.title }}
             </v-btn>
         </div>
