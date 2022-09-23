@@ -10,6 +10,7 @@
                                 <h3 class="title blue-grey--text text--darken-2 font-weight-bold">{{appItem.title}}</h3>
                             </div>
                         </v-card-text>
+                        
                     </v-card>
                 </router-link>
                
@@ -55,7 +56,7 @@ export default {
                 title: "工作事項管理模組",
                 imgUrl: require('@/assets/img06.jpg'),
             },
-            
+
         ]
     }),
     computed: {
@@ -86,6 +87,5 @@ export default {
 <style lang="scss">
 .theme--light .v-content {
     background-color: #eef5f9;
-    height: 100vh;
 }
 </style>

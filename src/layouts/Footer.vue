@@ -1,5 +1,5 @@
 <template>
-    <v-footer app class="footerpart pa-0" inset>
+    <v-footer app class="footerpart pa-0">
       <v-col cols="12">
         <div class="d-flex">
             <v-img src="../assets/Manager.png" max-width="120"></v-img>
@@ -20,5 +20,6 @@ export default {
 <style lang="scss">
 .v-application .footerpart {
     background-color: #eef5f9;
+    position: static;
 }
 </style>
