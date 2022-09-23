@@ -213,7 +213,7 @@ export default {
         ],
         classItems: [
             {
-                path: "/training-class",
+                path: "/class-content",
                 title: "影片教材大師",
                 imgUrl: require('@/assets/lesson01.png'),
                 teacherInfo: {
@@ -225,7 +225,7 @@ export default {
                 
             },
             {
-                path: "/training-class",
+                path: "/class-content",
                 title: "影片教材大師",
                 imgUrl: require('@/assets/lesson02.jpeg'),
                 teacherInfo: {
@@ -237,7 +237,7 @@ export default {
                 
             },
             {
-                path: "/training-class",
+                path: "/class-content",
                 title: "影片教材大師",
                 imgUrl: require('@/assets/lesson03.jpeg'),
                 teacherInfo: {
@@ -249,7 +249,7 @@ export default {
                 
             },
             {
-                path: "/training-class",
+                path: "/class-content",
                 title: "影片教材大師",
                 imgUrl: require('@/assets/lesson04.jpeg'),
                 teacherInfo: {
@@ -261,7 +261,7 @@ export default {
                 
             },
             {
-                path: "/training-class",
+                path: "/class-content",
                 title: "影片教材大師",
                 imgUrl: require('@/assets/lesson05.jpeg'),
                 teacherInfo: {
@@ -277,7 +277,7 @@ export default {
         ],
         trackingItems: [
             {
-                path: "/training-class",
+                path: "/class-content",
                 title: "影片教材大師",
                 imgUrl: require('@/assets/lesson03.jpeg'),
                 teacherInfo: {
@@ -289,7 +289,7 @@ export default {
 
             },
             {
-                path: "/training-class",
+                path: "/class-content",
                 title: "影片教材大師",
                 imgUrl: require('@/assets/lesson04.jpeg'),
                 teacherInfo: {
@@ -301,7 +301,7 @@ export default {
 
             },
             {
-                path: "/training-class",
+                path: "/class-content",
                 title: "影片教材大師",
                 imgUrl: require('@/assets/lesson05.jpeg'),
                 teacherInfo: {

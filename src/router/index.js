@@ -21,6 +21,12 @@ const router = new VueRouter({
                     component: () => import('@/views/pages/Knowledge'),
                 },
                 {
+                    name: 'ClassContent',
+                    path: 'class-content',
+                    meta: { title: '課程內容' },
+                    component: () => import('@/views/pages/ClassContent'),
+                },
+                {
                     name: 'About',
                     path: 'about',
                     component: () => import('@/views/About'),
