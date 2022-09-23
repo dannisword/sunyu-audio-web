@@ -1,6 +1,22 @@
 <template>
     <v-container>
         <v-row>
+            <v-col cols="12" class="banner">
+                <v-carousel v-model="model" hide-delimiter-background delimiter-icon="mdi-minus" height="100"
+                    :continuous="false" :cycle="cycle" :show-arrows="false">
+                    <v-carousel-item v-for="activity in activities" :key="activity">
+                        <v-sheet color="orange darken-1" height="100%" tile>
+                            <v-row class="fill-height" align="center" justify="center">
+                                <div class="text-h5 white--text mr-2">
+                                    {{ activity.mainTitle }}{{ activity.subTitle }}
+                                </div>
+                            </v-row>
+                        </v-sheet>
+                    </v-carousel-item>
+                </v-carousel>
+            </v-col>
+        </v-row>
+        <v-row align="center" class="list-content">
             <v-col cols="12">
                 <v-card class="deep-orange-border-bottom">
                     <v-card-text class="pa-3">
@@ -10,7 +26,7 @@
                     </v-card-text>
                 </v-card>
             </v-col>
-            <v-col cols="12" md="6" sm="2" v-for="classItem in classItems.slice(0, 2)" :key="classItem" text>
+            <v-col cols="12" md="6" sm="6" v-for="classItem in classItems.slice(0, 2)" :key="classItem" text>
                 <router-link :to="classItem.path" custom>
                     <v-card elevation="3" outlined>
                         <v-img src="../../assets/lesson01_bg.png">
@@ -109,7 +125,7 @@
                     </v-card-text>
                 </v-card>
             </v-col>
-            <v-col cols="12" md="4" v-for="classItem in classItems" :key="classItem" text>
+            <v-col cols="12" md="4" sm="6" v-for="classItem in classItems" :key="classItem" text>
                 <router-link :to="classItem.path" custom>
                     <v-card elevation="3" outlined>
                         <v-img src="../../assets/lesson01_bg.png">
@@ -156,7 +172,7 @@
                     </v-card-text>
                 </v-card>
             </v-col>
-            <v-col cols="12" md="3" v-for="teacher in teacherList" :key="teacher" text>
+            <v-col cols="12" md="3" sm="6" v-for="teacher in teacherList" :key="teacher" text>
             <v-card elevation="3" outlined>
                 <v-card-text>
                     <div class="d-flex flex-column align-center">
@@ -183,6 +199,18 @@
 export default {
     name: "Knowledge",
     data: () => ({
+        activities: [
+            {
+                id:1,
+                mainTitle: '線上帶你學到會',
+                subTitle: '在線學習人數超過 30, 000'
+            },
+            {
+                id:2,
+                mainTitle: '線上 24 小時內隨傳隨到',
+                subTitle: '學習不卡關'
+            },
+        ],
         classItems: [
             {
                 path: "/training-class",
@@ -340,5 +368,17 @@ export default {
     width: 100%;
     padding: 0.8rem;
 
+}
+.banner {
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.list-content {
+    margin-top: 100px !important;
 }
 </style>

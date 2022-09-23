@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <v-row>
-            <v-col cols="12" md="4" sm="2" v-for="appItem in appItems" :key="appItem" text>
+            <v-col cols="12" md="4" sm="6" v-for="appItem in appItems" :key="appItem" text>
                 <router-link :to="appItem.path" custom>
                     <v-card elevation="3" outlined>
                         <v-img :src="appItem.imgUrl"></v-img>
