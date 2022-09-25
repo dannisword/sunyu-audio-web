@@ -1,21 +1,6 @@
 <template>
     <v-container>
-        <v-row>
-            <v-col cols="12" class="banner">
-                <v-carousel v-model="model" hide-delimiter-background delimiter-icon="mdi-minus" height="100"
-                    :continuous="false" :cycle="cycle" :show-arrows="false">
-                    <v-carousel-item v-for="activity in activities" :key="activity">
-                        <v-sheet color="orange darken-1" height="100%" tile>
-                            <v-row class="fill-height" align="center" justify="center">
-                                <div class="text-h5 white--text mr-2">
-                                    {{ activity.mainTitle }}{{ activity.subTitle }}
-                                </div>
-                            </v-row>
-                        </v-sheet>
-                    </v-carousel-item>
-                </v-carousel>
-            </v-col>
-        </v-row>
+        <Banner />
         <v-row align="center" class="list-content">
             <v-col cols="12">
                 <v-card class="deep-orange-border-bottom">
@@ -196,8 +181,12 @@
 
 
 <script>
+import Banner from '../../components/Banner.vue'
 export default {
     name: "Knowledge",
+    components: {
+        Banner,
+    },
     data: () => ({
         activities: [
             {

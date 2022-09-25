@@ -1,21 +1,6 @@
 <template>
     <v-container fluid class="pa-0">
-        <v-row>
-            <v-col cols="12" class="banner">
-                <v-carousel v-model="model" hide-delimiter-background delimiter-icon="mdi-minus" height="100"
-                    :continuous="false" :cycle="cycle" :show-arrows="false">
-                    <v-carousel-item v-for="activity in activities" :key="activity">
-                        <v-sheet color="orange darken-1" height="100%" tile>
-                            <v-row class="fill-height" align="center" justify="center">
-                                <div class="text-h5 white--text mr-2">
-                                    {{ activity.mainTitle }}{{ activity.subTitle }}
-                                </div>
-                            </v-row>
-                        </v-sheet>
-                    </v-carousel-item>
-                </v-carousel>
-            </v-col>
-        </v-row>
+        <Banner />
         <v-parallax dark src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg" class="parallax-wrap">
             <v-row align="center" justify="center">
                 <v-col class="text-center" md="8">
@@ -95,14 +80,18 @@
 
 
 <script>
+import Banner from '../../components/Banner.vue'
 export default {
-    name: "Knowledge",
+    name: "ClassContent",
+    components: {
+        Banner,
+    },
     data: () => ({
         activities: [
             {
                 id: 1,
                 mainTitle: '線上帶你學到會',
-                subTitle: '在線學習人數超過 30, 000'
+                subTitle: '在線學習人數超過 30, 000',
             },
             {
                 id: 2,

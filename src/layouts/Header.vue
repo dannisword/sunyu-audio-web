@@ -13,7 +13,7 @@
         <v-spacer />
         <!---right part -->
         <div class="d-none d-sm-flex">
-            <v-btn color="grey darken-3" v-for="link in userprofile" :key="link" text>
+            <v-btn color="grey darken-3" v-for="link in userprofile" :key="link" text :href="link.url">
                 {{ link.title }}
             </v-btn>
         </div>
@@ -51,9 +51,15 @@ export default {
     },
     data: () => ({
         userprofile: [
-            { title: "所有課程" },
-            { title: "我的課程" },
-            { title: "學習中心" }
+            {
+                title: "所有課程",
+                url:'/all-class' },
+            {
+                title: "我的課程",
+                url: '/my-class' },
+            {
+                title: "學習中心",
+                url: '/learn-central' }
         ],
         href() {
             return undefined;
