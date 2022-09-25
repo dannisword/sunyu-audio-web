@@ -1,178 +1,62 @@
 <template>
-    <v-container fluid class="down-top-padding">
+    <v-container>
         <v-row>
-            <v-col cols="12" lg="8">
-                <v-card>
-                    <v-card-text class="pa-5">
-                        <div class="d-sm-flex align-center">
-                            <div>
-                                <h3 class="title blue-grey--text text--darken-2 font-weight-regular">Sales Overview</h3>
-                                <h6 class="subtitle-2 font-weight-light">Ample Admin Vs Pixel Admin</h6>
+            <v-col cols="12" md="4" sm="6" v-for="appItem in appItems" :key="appItem" text>
+                <router-link :to="appItem.path" custom>
+                    <v-card elevation="3" outlined>
+                        <v-img :src="appItem.imgUrl"></v-img>
+                        <v-card-text class="pa-5">
+                            <div class="d-sm-flex align-center">
+                                <h3 class="title blue-grey--text text--darken-2 font-weight-bold">{{appItem.title}}</h3>
                             </div>
-                            <div class="ml-auto">
-                                <div class="d-flex align-center">
-                                    <div class="d-flex align-center px-2">
-                                        <span class="success--text">
-                                            <span class="overline">
-                                                <i class="mdi mdi-brightness-1 mr-2"></i>
-                                            </span>
-                                            <span class="font-weight-regular">Ample</span>
-                                        </span>
-                                    </div>
-                                    <div class="d-flex align-center px-2">
-                                        <span class="info--text">
-                                            <span class="overline">
-                                                <i class="mdi mdi-brightness-1 mr-2"></i>
-                                            </span>
-                                            <span class="font-weight-regular">Pixel</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-9">
-                            <v-sparkline type="bar" :fill="fill2" height="80px" :gradient="gradient2"
-                                :line-width="width2" :padding="padding2" :smooth="radius2 || false" :value="value2"
-                                auto-draw></v-sparkline>
-                        </div>
-                    </v-card-text>
-                </v-card>
+                        </v-card-text>
+                        
+                    </v-card>
+                </router-link>
+               
             </v-col>
-            <v-col cols="12" lg="4">
-        <v-card>
-          <v-card-text class="pa-5">
-            <h3 class="title blue-grey--text text--darken-2 font-weight-regular">Our Visitors</h3>
-            <h6 class="subtitle-2 font-weight-light">Different Devices Used to Visit</h6>
-            <div class="pb-6">
-              <v-sparkline
-                :fill="fill"
-                height="145px"
-                :gradient="gradient"
-                :line-width="width"
-                :padding="padding"
-                :smooth="radius || false"
-                :value="value"
-                auto-draw
-              ></v-sparkline>
-            </div>
-            <div class="d-flex align-center justify-center border-top pt-4 pb-2">
-              <div class="d-flex align-center px-3">
-                <span class="info--text">
-                  <span class="overline">
-                    <i class="mdi mdi-brightness-1 mr-2"></i>
-                  </span>
-                  <span class="font-weight-regular">Mobile</span>
-                </span>
-              </div>
-              <div class="d-flex align-center px-3">
-                <span class="deep-purple--text text--lighten-1">
-                  <span class="overline">
-                    <i class="mdi mdi-brightness-1 mr-2"></i>
-                  </span>
-                  <span class="font-weight-regular">Desktop</span>
-                </span>
-              </div>
-              <div class="d-flex align-center px-3">
-                <span class="success--text">
-                  <span class="overline">
-                    <i class="mdi mdi-brightness-1 mr-2"></i>
-                  </span>
-                  <span class="font-weight-regular">Tablet</span>
-                </span>
-              </div>
-            </div>
-          </v-card-text>
-        </v-card>
-      </v-col>
         </v-row>
 
     </v-container>
 </template>
-  
-  
-<script>
-const gradients = [
-    ["#6c757d"],
-    ["#6c757d"],
-    ["#6c757d", "#6c757d", "#6c757d"],
-    ["#21c1d6", "21c1d6"],
-    ["#21c1d6", "#21c1d6", "#21c1d6"],
-    ["#21c1d6", "#21c1d6", "#21c1d6"]
-];
 
-const gradients2 = [
-    ["#1e88e5"],
-    ["#1e88e5"],
-    ["#1e88e5", "#1e88e5", "#1e88e5"],
-    ["#1e88e5", "#1e88e5"],
-    ["#1e88e5", "#1e88e5", "#1e88e5"],
-    ["#1e88e5", "#1e88e5", "#1e88e5"]
-];
+<script>
 
 export default {
     name: "BasicDashboard",
     data: () => ({
-        fill: true,
-        gradient: gradients[4],
-        gradients,
-        padding: 8,
-        radius: 50,
-        value: [0, 2, 5, 9, 5, 10, 3, 5, 1, 8, 2, 9, 0],
-        width: 1,
+        appItems: [
+            {
+                path: "/training-class",
+                title: "課程訓練管理模組",
+                imgUrl: require('@/assets/img01.jpg'),
+            },
+            {
+                path: "/professional-data",
+                title: "專家資料庫",
+                imgUrl: require('@/assets/img02.jpg'),
+            },
+            {
+                path: "/quizzes",
+                title: "測驗題庫管理模組",
+                imgUrl: require('@/assets/img03.jpg'),
+            },
+            {
+                path: "/knowledge",
+                title: "產業創新知識庫",
+                imgUrl: require('@/assets/img04.jpg'),
+            },
+            {
+                path: "/know-how",
+                title: "智慧商情模組",
+                imgUrl: require('@/assets/img05.jpg'),
+            },
+            {
+                path: "/wrok-management",
+                title: "工作事項管理模組",
+                imgUrl: require('@/assets/img06.jpg'),
+            },
 
-        fill2: true,
-        gradient2: gradients2[4],
-        gradients2,
-        radius2: 0,
-        padding2: 0,
-        value2: [1, 2, 5, 9, 5, 10, 3, 5, 1, 8, 2, 9, 4],
-        width2: 4,
-        tasks: [
-            {
-                done: false,
-                text: "Check emails of Mr.Shah"
-            },
-            {
-                done: false,
-                text: "Give salary to employee"
-            }
-        ],
-        task: null,
-        selected: [2],
-        items: [
-            {
-                action: "15 min",
-                headline: "Brunch this weekend?",
-                title: "Ali Connors",
-                subtitle:
-                    "I'll be in your neighborhood doing errands this weekend. Do you want to hang out?"
-            },
-            {
-                action: "2 hr",
-                headline: "Summer BBQ",
-                title: "me, Scrott, Jennifer",
-                subtitle: "Wish I could come, but I'm out of town this weekend."
-            },
-            {
-                action: "6 hr",
-                headline: "Oui oui",
-                title: "Sandra Adams",
-                subtitle: "Do you have Paris recommendations? Have you ever been?"
-            },
-            {
-                action: "12 hr",
-                headline: "Birthday gift",
-                title: "Trevor Hansen",
-                subtitle:
-                    "Have any ideas about what we should get Heidi for her birthday?"
-            },
-            {
-                action: "18hr",
-                headline: "Recipe to try",
-                title: "Britta Holt",
-                subtitle:
-                    "We should eat this: Grate, Squash, Corn, and tomatillo Tacos."
-            }
         ]
     }),
     computed: {
@@ -199,3 +83,9 @@ export default {
     }
 };
 </script>
+
+<style lang="scss">
+.theme--light .v-content {
+    background-color: #eef5f9;
+}
+</style>
