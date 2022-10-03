@@ -1,24 +1,42 @@
-# sunyu-audio-web
+# vue2
+```
+vue create [project name]
+```
+選擇  
+Default ([Vue 2] babel, eslint)
 
-## Project setup
+
+## [router](https://v3.router.vuejs.org/installation.html#direct-download-cdn)
+
 ```
-npm install
+npm install vue-router
+```
+OR
+```
+vue add router
+```
+- 選擇 history mode
+
+### Started
+- main.js 新增
+```
+import router from './router'
+
+const app = new Vue({
+  router
+}).$mount('#app')
+```
+## [vuex](https://v3.vuex.vuejs.org/installation.html)
+```
+npm install vuex@3.6.2
 ```
 
-### Compiles and hot-reloads for development
-```
+## vuetify
+npm install sass
+npm install sass-loader
+vue add vuetify
+- 選擇 Vuetify 2 - Configure Vue CLI (advanced)
+
+
+## vue2 run
 npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

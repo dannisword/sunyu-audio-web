@@ -48,6 +48,11 @@ const router = new VueRouter({
                     meta: { title: '產品入口網' },
                     component: () => import('@/views/dashboard/Dashboard'),
                 },
+                {
+                    name: 'Video',
+                    path: 'Video',
+                    component: () => import('@/views/pages/Video'),
+                },
             ]
         }
     ]
