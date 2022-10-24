@@ -37,6 +37,8 @@ npm install sass-loader
 vue add vuetify
 - 選擇 Vuetify 2 - Configure Vue CLI (advanced)
 
+## axios
+npm install axios@1.1.3
 
 ## vue2 run
 npm run serve

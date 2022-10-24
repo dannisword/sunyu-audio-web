@@ -15,10 +15,22 @@ const router = new VueRouter({
             component: () => import('@/layouts/Layout'),
             children: [
                 {
-                    name: 'Knowledge',
-                    path: 'knowledge',
+                    name: 'AllClass',
+                    path: '/AllClass',
                     meta: { title: '產業創新知識庫' },
                     component: () => import('@/views/pages/Knowledge'),
+                },
+                {
+                    name: 'Knowledge',
+                    path: '/knowledge',
+                    meta: { title: '產業創新知識庫' },
+                    component: () => import('@/views/pages/Knowledge'),
+                },
+                {
+                    name: 'Course',
+                    path: '/Course/:Seq',
+                    meta: { title: '產業創新知識庫' },
+                    component: () => import('@/views/pages/Course'),
                 },
                 {
                     name: 'ClassContent',

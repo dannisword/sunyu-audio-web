@@ -1,6 +1,7 @@
 <template>
   <v-container>
     <Banner />
+    <!-- 最新上架 -->
     <v-row align="center" class="list-content">
       <v-col cols="12">
         <v-card class="deep-orange-border-bottom">
@@ -15,55 +16,44 @@
           </v-card-text>
         </v-card>
       </v-col>
-      <v-col
-        cols="12"
-        md="6"
-        sm="6"
-        v-for="classItem in classItems.slice(0, 2)"
-        :key="classItem"
-        text
-      >
-        <router-link :to="classItem.path" custom>
-          <v-card elevation="3" outlined>
-            <v-img src="../../assets/lesson01_bg.png">
-              <img :src="classItem.imgUrl" class="lesson_pic" />
-            </v-img>
-            <v-card-title
-              class="title blue-grey--text text--darken-2 font-weight-bold mb-1"
-              >{{ classItem.title }}
-            </v-card-title>
-            <v-card-text>
-              <div class="d-flex align-center mx-0">
-                <v-avatar size="56">
-                  <img alt="user" :src="classItem.teacherInfo.teacherUrl" />
-                </v-avatar>
+      <v-col cols="12" md="6" sm="6" v-for="item in last" text>
+        <v-card elevation="3" outlined @click="onNav(item)">
+          <v-img src="@/assets/lesson01_bg.png"> </v-img>
+          <v-card-title
+            class="title blue-grey--text text--darken-2 font-weight-bold mb-1"
+            >{{ item.courseName }}
+          </v-card-title>
+          <v-card-text>
+            <div class="d-flex align-center mx-0">
+              <v-avatar size="56">
+                <img alt="user" src="@/assets/teacher01.png" />
+              </v-avatar>
 
-                <div class="text-subtitle-1 ms-4">
-                  {{ classItem.teacherInfo.teacherName }}
-                </div>
+              <div class="text-subtitle-1 ms-4">
+                AutoMedia
               </div>
-              <div class="d-flex justify-space-between align-center">
-                <div
-                  class="my-4 body-2 text-decoration-line-through blue-grey--text text--darken-1"
+            </div>
+            <div class="d-flex justify-space-between align-center">
+              <div
+                class="my-4 body-2 text-decoration-line-through blue-grey--text text--darken-1"
+              >
+                原價 $ 1000
+              </div>
+              <div class="my-4">
+                <span
+                  class="body-2 font-weight-bold amber--text text--darken-3"
                 >
-                  原價 $ {{ classItem.unitPrice }}
-                </div>
-                <div class="my-4">
-                  <span
-                    class="body-2 font-weight-bold amber--text text--darken-3"
-                  >
-                    優惠價
-                  </span>
-                  <span
-                    class="text-h5 font-weight-bold amber--text text--darken-3"
-                  >
-                    $ {{ classItem.priceLimit }}
-                  </span>
-                </div>
+                  優惠價
+                </span>
+                <span
+                  class="text-h5 font-weight-bold amber--text text--darken-3"
+                >
+                  $ 2000
+                </span>
               </div>
-            </v-card-text>
-          </v-card>
-        </router-link>
+            </div>
+          </v-card-text>
+        </v-card>
       </v-col>
       <v-col cols="12">
         <v-card class="deep-orange-border-bottom">
@@ -83,7 +73,7 @@
         md="4"
         sm="6"
         v-for="trackingItem in trackingItems"
-        :key="trackingItem"
+        :key="trackingItem.id"
         text
       >
         <router-link :to="trackingItem.path" custom>
@@ -129,6 +119,7 @@
         </router-link>
       </v-col>
     </v-row>
+<!-- -->
     <v-row align="center">
       <v-col cols="12">
         <v-card class="deep-orange-border-bottom">
@@ -143,7 +134,10 @@
                 active-class="deep-purple accent-4 white--text"
                 column
               >
-                <v-chip v-for="classOption in classOptions" :key="classOption">
+                <v-chip
+                  v-for="classOption in classOptions"
+                  :key="classOption.optionID"
+                >
                   {{ classOption.optionName }}
                 </v-chip>
               </v-chip-group>
@@ -156,7 +150,7 @@
         md="4"
         sm="6"
         v-for="classItem in classItems"
-        :key="classItem"
+        :key="classItem.id"
         text
       >
         <router-link :to="classItem.path" custom>
@@ -221,7 +215,7 @@
         md="3"
         sm="6"
         v-for="teacher in teacherList"
-        :key="teacher"
+        :key="teacher.teacherID"
         text
       >
         <v-card elevation="3" outlined>
@@ -242,24 +236,13 @@
         </v-card>
       </v-col>
     </v-row>
-    <v-row>
-      <video-player
-        class="video-player vjs-custom-skin"
-        :playsinline="true"
-        :options="playerOptions"
-        @canplay="canplay($event)"
-        @play="play($event)"
-        @pause="pause($event)"
-        @ended="ended"
-        @timeupdate="timeupdate($event)"
-        @seeking="seeked"
-      ></video-player>
-    </v-row>
   </v-container>
 </template>
 
 <script>
+import { getLast } from "@/api/course";
 import Banner from "../../components/Banner.vue";
+
 export default {
   name: "Knowledge",
   components: {
@@ -280,6 +263,7 @@ export default {
     ],
     classItems: [
       {
+        id: 1,
         path: "/class-content",
         title: "影片教材大師",
         imgUrl: require("@/assets/lesson01.png"),
@@ -291,6 +275,7 @@ export default {
         priceLimit: 2100,
       },
       {
+        id: 2,
         path: "/class-content",
         title: "影片教材大師",
         imgUrl: require("@/assets/lesson02.jpeg"),
@@ -302,6 +287,7 @@ export default {
         priceLimit: 2100,
       },
       {
+        id: 3,
         path: "/class-content",
         title: "影片教材大師",
         imgUrl: require("@/assets/lesson03.jpeg"),
@@ -313,6 +299,7 @@ export default {
         priceLimit: 2100,
       },
       {
+        id: 4,
         path: "/class-content",
         title: "影片教材大師",
         imgUrl: require("@/assets/lesson04.jpeg"),
@@ -324,6 +311,7 @@ export default {
         priceLimit: 2100,
       },
       {
+        id: 5,
         path: "/class-content",
         title: "影片教材大師",
         imgUrl: require("@/assets/lesson05.jpeg"),
@@ -337,6 +325,7 @@ export default {
     ],
     trackingItems: [
       {
+        id: 1,
         path: "/class-content",
         title: "影片教材大師",
         imgUrl: require("@/assets/lesson03.jpeg"),
@@ -348,6 +337,7 @@ export default {
         priceLimit: 2100,
       },
       {
+        id: 2,
         path: "/class-content",
         title: "影片教材大師",
         imgUrl: require("@/assets/lesson04.jpeg"),
@@ -359,6 +349,7 @@ export default {
         priceLimit: 2100,
       },
       {
+        id: 3,
         path: "/class-content",
         title: "影片教材大師",
         imgUrl: require("@/assets/lesson05.jpeg"),
@@ -407,7 +398,19 @@ export default {
       { optionID: 2, optionName: "class2" },
       { optionID: 3, optionName: "class3" },
     ],
+    last: [],
   }),
+  created() {
+    getLast().then((res) => {
+      this.last = res;
+    });
+  },
+  methods: {
+    onNav(val) {
+      const uri = `Course/${val.seq}`;
+      this.$router.push(uri);
+    },
+  },
 };
 </script>
 
