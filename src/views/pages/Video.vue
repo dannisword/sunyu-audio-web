@@ -1,10 +1,7 @@
 <template>
   <div>
-    <video-player ref="video" :options="videoOptions" />
-    <input
-      style="padding: 8px"
-      v-model="secound"
-    />
+    <video-player ref="video" :src="src" />
+    <input style="padding: 8px" v-model="secound" />
     <v-btn @click="onAction(1)">start </v-btn>
     <v-btn @click="onAction(2)">stop </v-btn>
   </div>
@@ -21,13 +18,13 @@ export default {
     return {
       play: null,
       secound: 5,
+      src: "http://nettuts.s3.amazonaws.com/763_sammyJSIntro/trailer_test.mp4",
       videoOptions: {
-        autoplay: true,
+        autoplay: false,
         controls: true,
-
         sources: [
           {
-            src: "http://nettuts.s3.amazonaws.com/763_sammyJSIntro/trailer_test.mp4",
+            src: "http://localhost:8080/assets/mp4/1001.mp4", //"http://nettuts.s3.amazonaws.com/763_sammyJSIntro/trailer_test.mp4",
             type: "video/mp4",
           },
         ],
@@ -42,13 +39,21 @@ export default {
   mounted() {
     //this.play = videojs(this.$refs.video);
     //this.play = this.$video(this.$refs.video);
+    window.onpopstate = function (event) {
+      alert(
+        "location: " +
+          document.location +
+          ", state: " +
+          JSON.stringify(event.state)
+      );
+    };
   },
   created() {
     //this.play = this.$refs.video;
+    this.play.pause();
   },
   methods: {
     onAction(action) {
-      console.log(this.secound);
       if (action == 1) {
         this.video.currentTime(this.secound);
         this.video.play();
@@ -58,6 +63,13 @@ export default {
         this.video.pause();
       }
     },
+  },
+  beforeDestroy() {
+    console.log("beforeDestroy");
+    console.log(this.play);
+  },
+  destroyed() {
+    console.log("destroyed");
   },
 };
 </script>

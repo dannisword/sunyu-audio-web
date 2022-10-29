@@ -6,7 +6,7 @@ import store from "./store/store";
 
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
-
+import "@/permission"; 
 
 import "roboto-fontface/css/roboto/roboto-fontface.css";
 import "@mdi/font/css/materialdesignicons.css";

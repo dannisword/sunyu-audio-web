@@ -33,3 +33,15 @@ export function getMine(params) {
     method: "Get",
   });
 }
+/**
+ * 
+ * @param {*} seq 
+ * @returns 
+ */
+export function getCourse(seq) {
+  return request({
+    url: `/v1/Course/${seq}`,
+    method: "Get",
+  });
+}
+getCourse
