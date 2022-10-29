@@ -16,6 +16,7 @@
           </v-card-text>
         </v-card>
       </v-col>
+
       <v-col cols="12" md="6" sm="6" v-for="item in last" text>
         <v-card elevation="3" outlined @click="onNav(item)">
           <v-img src="@/assets/lesson01_bg.png"> </v-img>
@@ -29,9 +30,7 @@
                 <img alt="user" src="@/assets/teacher01.png" />
               </v-avatar>
 
-              <div class="text-subtitle-1 ms-4">
-                AutoMedia
-              </div>
+              <div class="text-subtitle-1 ms-4">AutoMedia</div>
             </div>
             <div class="d-flex justify-space-between align-center">
               <div
@@ -55,6 +54,9 @@
           </v-card-text>
         </v-card>
       </v-col>
+    </v-row>
+    <!-- 繼續看 -->
+    <v-row align="center">
       <v-col cols="12">
         <v-card class="deep-orange-border-bottom">
           <v-card-text class="pa-3">
@@ -68,58 +70,47 @@
           </v-card-text>
         </v-card>
       </v-col>
-      <v-col
-        cols="12"
-        md="4"
-        sm="6"
-        v-for="trackingItem in trackingItems"
-        :key="trackingItem.id"
-        text
-      >
-        <router-link :to="trackingItem.path" custom>
-          <v-card elevation="3" outlined>
-            <v-img src="../../assets/lesson01_bg.png">
-              <img :src="trackingItem.imgUrl" class="lesson_pic" />
-            </v-img>
-            <v-card-title
-              class="title blue-grey--text text--darken-2 font-weight-bold mb-1"
-              >{{ trackingItem.title }}
-            </v-card-title>
-            <v-card-text>
-              <div class="d-flex align-center mx-0">
-                <v-avatar size="56">
-                  <img alt="user" :src="trackingItem.teacherInfo.teacherUrl" />
-                </v-avatar>
 
-                <div class="text-subtitle-1 ms-4">
-                  {{ trackingItem.teacherInfo.teacherName }}
-                </div>
+      <v-col cols="12" md="4" sm="6" v-for="item in half" text>
+        <v-card elevation="3" outlined @click="onNav(item)">
+          <v-img src="@/assets/lesson01_bg.png"> </v-img>
+          <v-card-title
+            class="title blue-grey--text text--darken-2 font-weight-bold mb-1"
+            >{{ item.courseName }}
+          </v-card-title>
+          <v-card-text>
+            <div class="d-flex align-center mx-0">
+              <v-avatar size="56">
+                <img alt="user" src="@/assets/teacher01.png" />
+              </v-avatar>
+
+              <div class="text-subtitle-1 ms-4">AutoMedia</div>
+            </div>
+            <div class="d-flex justify-space-between align-center">
+              <div
+                class="my-4 body-2 text-decoration-line-through blue-grey--text text--darken-1"
+              >
+                原價 $ 1000
               </div>
-              <div class="d-flex justify-space-between align-center">
-                <div
-                  class="my-4 body-2 text-decoration-line-through blue-grey--text text--darken-1"
+              <div class="my-4">
+                <span
+                  class="body-2 font-weight-bold amber--text text--darken-3"
                 >
-                  原價 $ {{ trackingItem.unitPrice }}
-                </div>
-                <div class="my-4">
-                  <span
-                    class="body-2 font-weight-bold amber--text text--darken-3"
-                  >
-                    優惠價
-                  </span>
-                  <span
-                    class="text-h5 font-weight-bold amber--text text--darken-3"
-                  >
-                    $ {{ trackingItem.priceLimit }}
-                  </span>
-                </div>
+                  優惠價
+                </span>
+                <span
+                  class="text-h5 font-weight-bold amber--text text--darken-3"
+                >
+                  $ 2000
+                </span>
               </div>
-            </v-card-text>
-          </v-card>
-        </router-link>
+            </div>
+          </v-card-text>
+        </v-card>
       </v-col>
     </v-row>
-<!-- -->
+
+    <!-- 全部課程 -->
     <v-row align="center">
       <v-col cols="12">
         <v-card class="deep-orange-border-bottom">
@@ -145,57 +136,46 @@
           </v-card-text>
         </v-card>
       </v-col>
-      <v-col
-        cols="12"
-        md="4"
-        sm="6"
-        v-for="classItem in classItems"
-        :key="classItem.id"
-        text
-      >
-        <router-link :to="classItem.path" custom>
-          <v-card elevation="3" outlined>
-            <v-img src="../../assets/lesson01_bg.png">
-              <img :src="classItem.imgUrl" class="lesson_pic" />
-            </v-img>
-            <v-card-title
-              class="title blue-grey--text text--darken-2 font-weight-bold mb-1"
-              >{{ classItem.title }}
-            </v-card-title>
-            <v-card-text>
-              <div class="d-flex align-center mx-0">
-                <v-avatar size="56">
-                  <img alt="user" :src="classItem.teacherInfo.teacherUrl" />
-                </v-avatar>
 
-                <div class="text-subtitle-1 ms-4">
-                  {{ classItem.teacherInfo.teacherName }}
-                </div>
+      <v-col cols="12" md="4" sm="6" v-for="item in mine" text>
+        <v-card elevation="3" outlined @click="onNav(item)">
+          <v-img src="@/assets/lesson01_bg.png"> </v-img>
+          <v-card-title
+            class="title blue-grey--text text--darken-2 font-weight-bold mb-1"
+            >{{ item.courseName }}
+          </v-card-title>
+          <v-card-text>
+            <div class="d-flex align-center mx-0">
+              <v-avatar size="56">
+                <img alt="user" src="@/assets/teacher01.png" />
+              </v-avatar>
+
+              <div class="text-subtitle-1 ms-4">AutoMedia</div>
+            </div>
+            <div class="d-flex justify-space-between align-center">
+              <div
+                class="my-4 body-2 text-decoration-line-through blue-grey--text text--darken-1"
+              >
+                原價 $ 1000
               </div>
-              <div class="d-flex justify-space-between align-center">
-                <div
-                  class="my-4 body-2 text-decoration-line-through blue-grey--text text--darken-1"
+              <div class="my-4">
+                <span
+                  class="body-2 font-weight-bold amber--text text--darken-3"
                 >
-                  原價 $ {{ classItem.unitPrice }}
-                </div>
-                <div class="my-4">
-                  <span
-                    class="body-2 font-weight-bold amber--text text--darken-3"
-                  >
-                    優惠價
-                  </span>
-                  <span
-                    class="text-h5 font-weight-bold amber--text text--darken-3"
-                  >
-                    $ {{ classItem.priceLimit }}
-                  </span>
-                </div>
+                  優惠價
+                </span>
+                <span
+                  class="text-h5 font-weight-bold amber--text text--darken-3"
+                >
+                  $ 2000
+                </span>
               </div>
-            </v-card-text>
-          </v-card>
-        </router-link>
+            </div>
+          </v-card-text>
+        </v-card>
       </v-col>
     </v-row>
+    <!-- -->
     <v-row align="center">
       <v-col cols="12">
         <v-card class="deep-orange-border-bottom">
@@ -240,15 +220,34 @@
 </template>
 
 <script>
-import { getLast } from "@/api/course";
+import { getLast, getHalf, getMine } from "@/api/course";
 import Banner from "../../components/Banner.vue";
+import pageMixin from "@/unit/pageMixin";
 
 export default {
   name: "Knowledge",
+  mixins: [pageMixin],
   components: {
     Banner,
   },
   data: () => ({
+    params: {
+      last: {
+        currentPage: 1,
+        itemsPerPage: 2,
+      },
+      half: {
+        currentPage: 1,
+        itemsPerPage: 3,
+      },
+      mine: {
+        currentPage: 1,
+        itemsPerPage: 6,
+      },
+    },
+    last: [],
+    half: [],
+    mine: [],
     activities: [
       {
         id: 1,
@@ -398,12 +397,21 @@ export default {
       { optionID: 2, optionName: "class2" },
       { optionID: 3, optionName: "class3" },
     ],
-    last: [],
   }),
   created() {
-    getLast().then((res) => {
-      this.last = res;
+    let params = this.getParams(this.params.last);
+    getLast(params).then((resp) => {
+      this.last = resp;
     });
+    params = this.getParams(this.params.half);
+    getHalf(params).then((resp) => {
+      this.half = resp;
+    });
+    params = this.getParams(this.params.mine);
+    getMine(params).then((resp) => {
+      this.mine = resp;
+    });
+    // all
   },
   methods: {
     onNav(val) {
