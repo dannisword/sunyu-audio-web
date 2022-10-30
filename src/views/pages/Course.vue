@@ -1,10 +1,6 @@
 <template>
   <v-container fluid class="pa-0">
     <Banner></Banner>
-    <!--
-  <video-player ref="video" :options="videoOptions" />
-    -->
-
     <v-parallax
       dark
       src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
@@ -17,7 +13,11 @@
           </h1>
           <v-card>
             <v-tabs color="deep-purple accent-4" vertical>
-              <v-tab v-for="item in course.appendiies" :key="item.seq">
+              <v-tab
+                v-for="item in course.appendiies"
+                :key="item.seq"
+                @click="onChang(item)"
+              >
                 {{ item.unit }}
               </v-tab>
               <v-tab-item
@@ -27,7 +27,11 @@
                 class="fade"
               >
                 <div class="videoContainer">
-                  <video-player ref="video" :src="item.filePath" />
+                  <!--
+
+   <video ref="video" class="video-js"></video>
+              -->
+                  <video-player ref="video" :src="src" />
                 </div>
               </v-tab-item>
             </v-tabs>
@@ -52,13 +56,43 @@ export default {
   data() {
     return {
       course: {},
+      videoOptions: {
+        autoplay: false,
+        controls: true,
+        sources: [
+          {
+            src: "", //http://nettuts.s3.amazonaws.com/763_sammyJSIntro/trailer_test.mp4
+            type: "video/mp4",
+          },
+        ],
+      },
     };
   },
   created() {
     getCourse(this.$route.params.Seq).then((res) => {
-      console.log(res);
       this.course = res;
+      this.src = res.appendiies[0].filePath;
+      //this.videoOptions.sources[0].src = res.appendiies[0].filePath;
     });
+  },
+  methods: {
+    onChang(val) {
+      console.log(val.seq);
+
+      const uri = `/Course/${this.$route.params.Seq}/${val.seq}`;
+      console.log(uri);
+      //const uri = "/Video";
+      this.$router.push(uri);
+      //var video = this.$refs.video.filter((x) => x.src == val.filePath);
+      //console.log(this.$refs.video[0].src);
+      //video.play;
+      //this.onAction();
+      //console.log(video[0].player);
+
+      //video[0].player.pause();
+      //video[0].player.src = val.filePath;
+    },
+    onAction() {},
   },
   beforeDestroy() {
     console.log("beforeDestroy");
@@ -115,7 +149,7 @@ export default {
 .videoContainer {
   position: absolute;
   width: 960px;
-  height:100%;
+  height: 100%;
   top: 0;
   left: 0;
   bottom: 0;

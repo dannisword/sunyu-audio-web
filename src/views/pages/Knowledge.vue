@@ -415,7 +415,7 @@ export default {
   },
   methods: {
     onNav(val) {
-      const uri = `Course/${val.seq}`;
+      const uri = `Course/${val.seq}/1`;
       //const uri = "/Video";
       this.$router.push(uri);
     },
