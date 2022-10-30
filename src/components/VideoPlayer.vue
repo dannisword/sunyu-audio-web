@@ -20,10 +20,13 @@ export default {
       type: String,
       default: "",
     },
+    second: {
+      type: Number,
+      default: 0,
+    },
   },
   data() {
     return {
- 
       player: null,
       videoOptions: {
         autoplay: false,
@@ -46,17 +49,16 @@ export default {
         //console.log("onPlayerReady", this);
       }
     );
-    //this.player.currentTime(20);
+    //this.player.currentTime(this.second);
   },
   methods: {
-    onAction(action) {
+    onAction() {
       this.player.pause();
       this.$emit("on-action");
     },
   },
   beforeDestroy() {
     if (this.player) {
-      //
       console.log("record");
       console.log(this.player);
       this.player.dispose();

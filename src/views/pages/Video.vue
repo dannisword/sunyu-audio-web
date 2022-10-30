@@ -1,7 +1,7 @@
 <template>
   <div>
     <video-player ref="video" :src="src" />
-    <input style="padding: 8px" v-model="secound" />
+    <input style="padding: 8px" v-model="second" />
     <v-btn @click="onAction(1)">start </v-btn>
     <v-btn @click="onAction(2)">stop </v-btn>
   </div>
@@ -17,7 +17,7 @@ export default {
   data() {
     return {
       play: null,
-      secound: 5,
+      second: 5,
       src: "http://nettuts.s3.amazonaws.com/763_sammyJSIntro/trailer_test.mp4",
       videoOptions: {
         autoplay: false,
@@ -55,7 +55,7 @@ export default {
   methods: {
     onAction(action) {
       if (action == 1) {
-        this.video.currentTime(this.secound);
+        this.video.currentTime(this.second);
         this.video.play();
       }
       //pause
