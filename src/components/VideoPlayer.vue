@@ -49,7 +49,6 @@ export default {
         console.log("onPlayerReady", this);
       }
     );
-    //this.player.currentTime(this.second);
   },
   methods: {
     onAction() {
@@ -59,8 +58,6 @@ export default {
   },
   beforeDestroy() {
     if (this.player) {
-      //console.log("record");
-      //console.log(this.player);
       this.player.dispose();
     }
   },
