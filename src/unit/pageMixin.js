@@ -21,4 +21,12 @@ export default {
       };
     },
   },
+  methods: {
+    encoded(val) {
+      return window.btoa(val);
+    },
+    decoded(val) {
+      return window.atob(val);
+    },
+  },
 };
