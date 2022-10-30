@@ -50,10 +50,7 @@ export default {
   }),
   methods: {
     onNav(val) {
-      //:key="link.id"
-      //  :href="link.url"
-      this.$emit('onRoute'); 
-      console.log(val);
+      this.$emit("onRoute");
       this.$router.push(val.url).catch((e) => {
         //console.log(e);
       });

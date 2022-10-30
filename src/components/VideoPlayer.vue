@@ -46,7 +46,7 @@ export default {
       this.$refs.videoPlayer,
       this.videoOptions,
       function onPlayerReady() {
-        //console.log("onPlayerReady", this);
+        console.log("onPlayerReady", this);
       }
     );
     //this.player.currentTime(this.second);
@@ -59,8 +59,8 @@ export default {
   },
   beforeDestroy() {
     if (this.player) {
-      console.log("record");
-      console.log(this.player);
+      //console.log("record");
+      //console.log(this.player);
       this.player.dispose();
     }
   },

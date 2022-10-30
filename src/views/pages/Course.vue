@@ -27,11 +27,7 @@
                 class="fade"
               >
                 <div class="videoContainer">
-                  <!--
-
-   <video ref="video" class="video-js"></video>
-              -->
-                  <video-player ref="video" :src="src" />
+                  <video-player ref="video" :src="item.filePath" />
                 </div>
               </v-tab-item>
             </v-tabs>
@@ -44,7 +40,7 @@
 <script>
 import Banner from "@/components/Banner.vue";
 import VideoPlayer from "@/components/VideoPlayer.vue";
-
+import pageMixin from "@/unit/pageMixin";
 import { getCourse } from "@/api/course";
 
 export default {
@@ -53,6 +49,7 @@ export default {
     Banner,
     VideoPlayer,
   },
+  mixins: [pageMixin],
   data() {
     return {
       course: {},
@@ -71,34 +68,30 @@ export default {
   created() {
     getCourse(this.$route.params.Seq).then((res) => {
       this.course = res;
-      this.src = res.appendiies[0].filePath;
-      //this.videoOptions.sources[0].src = res.appendiies[0].filePath;
     });
+  },
+  watch: {
+    async $route(to, from) {
+      const unit = this.decoded(from.params.Unit);
+      await this.pause(unit);
+    },
   },
   methods: {
     onChang(val) {
-      console.log(val.seq);
-
-      const uri = `/Course/${this.$route.params.Seq}/${val.seq}`;
-      console.log(uri);
-      //const uri = "/Video";
-      this.$router.push(uri);
-      //var video = this.$refs.video.filter((x) => x.src == val.filePath);
-      //console.log(this.$refs.video[0].src);
-      //video.play;
-      //this.onAction();
-      //console.log(video[0].player);
-
-      //video[0].player.pause();
-      //video[0].player.src = val.filePath;
+      const unit = this.encoded(val.filePath);
+      const uri = `/Course/${this.$route.params.Seq}/${unit}`;
+      this.$router.push(uri).catch((e) => {});
     },
-    onAction() {},
+    async pause(unit) {
+      var video = this.$refs.video.filter((x) => x.src == unit);
+      video[0].player.pause();
+    },
   },
   beforeDestroy() {
-    console.log("beforeDestroy");
+    //console.log("beforeDestroy");
   },
   destroyed() {
-    console.log("destroyed");
+    //console.log("destroyed");
   },
 };
 </script>

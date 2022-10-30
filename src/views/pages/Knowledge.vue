@@ -260,106 +260,6 @@ export default {
         subTitle: "學習不卡關",
       },
     ],
-    classItems: [
-      {
-        id: 1,
-        path: "/class-content",
-        title: "影片教材大師",
-        imgUrl: require("@/assets/lesson01.png"),
-        teacherInfo: {
-          teacherUrl: require("@/assets/teacher01.png"),
-          teacherName: "AutoMedia",
-        },
-        unitPrice: 4200,
-        priceLimit: 2100,
-      },
-      {
-        id: 2,
-        path: "/class-content",
-        title: "影片教材大師",
-        imgUrl: require("@/assets/lesson02.jpeg"),
-        teacherInfo: {
-          teacherUrl: require("@/assets/teacher01.png"),
-          teacherName: "AutoMedia",
-        },
-        unitPrice: 4200,
-        priceLimit: 2100,
-      },
-      {
-        id: 3,
-        path: "/class-content",
-        title: "影片教材大師",
-        imgUrl: require("@/assets/lesson03.jpeg"),
-        teacherInfo: {
-          teacherUrl: require("@/assets/teacher01.png"),
-          teacherName: "AutoMedia",
-        },
-        unitPrice: 4200,
-        priceLimit: 2100,
-      },
-      {
-        id: 4,
-        path: "/class-content",
-        title: "影片教材大師",
-        imgUrl: require("@/assets/lesson04.jpeg"),
-        teacherInfo: {
-          teacherUrl: require("@/assets/teacher01.png"),
-          teacherName: "AutoMedia",
-        },
-        unitPrice: 4200,
-        priceLimit: 2100,
-      },
-      {
-        id: 5,
-        path: "/class-content",
-        title: "影片教材大師",
-        imgUrl: require("@/assets/lesson05.jpeg"),
-        teacherInfo: {
-          teacherUrl: require("@/assets/teacher01.png"),
-          teacherName: "AutoMedia",
-        },
-        unitPrice: 4200,
-        priceLimit: 2100,
-      },
-    ],
-    trackingItems: [
-      {
-        id: 1,
-        path: "/class-content",
-        title: "影片教材大師",
-        imgUrl: require("@/assets/lesson03.jpeg"),
-        teacherInfo: {
-          teacherUrl: require("@/assets/teacher01.png"),
-          teacherName: "AutoMedia",
-        },
-        unitPrice: 4200,
-        priceLimit: 2100,
-      },
-      {
-        id: 2,
-        path: "/class-content",
-        title: "影片教材大師",
-        imgUrl: require("@/assets/lesson04.jpeg"),
-        teacherInfo: {
-          teacherUrl: require("@/assets/teacher01.png"),
-          teacherName: "AutoMedia",
-        },
-        unitPrice: 4200,
-        priceLimit: 2100,
-      },
-      {
-        id: 3,
-        path: "/class-content",
-        title: "影片教材大師",
-        imgUrl: require("@/assets/lesson05.jpeg"),
-        teacherInfo: {
-          teacherUrl: require("@/assets/teacher01.png"),
-          teacherName: "AutoMedia",
-        },
-        unitPrice: 4200,
-        priceLimit: 2100,
-      },
-    ],
     teacherList: [
       {
         teacherID: 1,
@@ -415,9 +315,13 @@ export default {
   },
   methods: {
     onNav(val) {
-      const uri = `Course/${val.seq}/1`;
-      //const uri = "/Video";
-      this.$router.push(uri);
+      if (val.appendiies) {
+        const unit = this.encoded(val.appendiies[0].filePath);
+
+        const uri = `Course/${val.seq}/${unit}`;
+        //const uri = "/Video";
+        this.$router.push(uri);
+      }
     },
   },
 };
