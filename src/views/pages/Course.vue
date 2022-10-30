@@ -125,30 +125,30 @@ export default {
         ],
       },
       classInfo: {
-      classTitle: "AutoMedia 影片教材大師",
-      teacherUrl: require("@/assets/teacher01.png"),
-      teacherName: "AutoMedia",
-      teacherInfo: "影片教材大師，擁有獨家專利AI智能配音技術，將簡報變成影片",
-      tips: [
-        {
-          content:
-            "數位學習服務：數位教材製作 / 線上學習系統 / 影片教材大師AutoMedia",
-        },
-        {
-          content:
-            "資訊軟體開發：票務自動化系統 / 人力資源管理系統 / 會計管理系統",
-        },
-        {
-          content: "人工智慧應用：AI語音合成技術 / 客服機器人 / 多元整合服務",
-        },
-      ],
-      items: [
-        { tab: "第 1 章", url: "https://www.youtube.com/embed/EjtJt7-i2VM" },
-        { tab: "第 2 章", url: "https://www.youtube.com/embed/EjtJt7-i2VM" },
-        { tab: "第 3 章", url: "https://www.youtube.com/embed/EjtJt7-i2VM" },
-        { tab: "第 4 章", url: "https://www.youtube.com/embed/EjtJt7-i2VM" },
-      ],
-    },
+        classTitle: "AutoMedia 影片教材大師",
+        teacherUrl: require("@/assets/teacher01.png"),
+        teacherName: "AutoMedia",
+        teacherInfo: "影片教材大師，擁有獨家專利AI智能配音技術，將簡報變成影片",
+        tips: [
+          {
+            content:
+              "數位學習服務：數位教材製作 / 線上學習系統 / 影片教材大師AutoMedia",
+          },
+          {
+            content:
+              "資訊軟體開發：票務自動化系統 / 人力資源管理系統 / 會計管理系統",
+          },
+          {
+            content: "人工智慧應用：AI語音合成技術 / 客服機器人 / 多元整合服務",
+          },
+        ],
+        items: [
+          { tab: "第 1 章", url: "https://www.youtube.com/embed/EjtJt7-i2VM" },
+          { tab: "第 2 章", url: "https://www.youtube.com/embed/EjtJt7-i2VM" },
+          { tab: "第 3 章", url: "https://www.youtube.com/embed/EjtJt7-i2VM" },
+          { tab: "第 4 章", url: "https://www.youtube.com/embed/EjtJt7-i2VM" },
+        ],
+      },
     };
   },
   created() {
@@ -183,7 +183,6 @@ export default {
 </script>
 
 <style lang="scss">
-
 .theme--light .v-content {
   background-color: #fff;
 }
