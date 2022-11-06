@@ -1,6 +1,6 @@
 <template>
-  <v-container class="pa-0">
-    <Banner />
+  <v-container fluid class="pa-0">
+    <Banner></Banner>
     <v-parallax
       dark
       src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
@@ -11,31 +11,30 @@
           <h1 class="text-h4 font-weight-bold mb-4">
             {{ classInfo.classTitle }}
           </h1>
-          <v-card>
-            <v-tabs color="deep-purple accent-4" vertical>
-              <v-tab v-for="item in classInfo.items" :key="item.tab">
-                {{ item.tab }}
-              </v-tab>
-              <v-tab-item
-                v-for="item in classInfo.items"
-                :key="item.tab"
-                :transition="false"
-                class="fade"
-              >
-                <div class="videoContainer">
-                  <iframe
-                    width="678"
-                    height="382"
-                    :src="item.url"
-                    title="【AutoMedia影片教材大師-多元應用案例】湯武IOT資訊監控系統—實現智能工廠"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
-                  ></iframe>
+        <v-card>
+            <!-- <v-tabs color="deep-purple accent-4" vertical>
+                      <v-tab v-for="item in classInfo.items" :key="item.tab">
+                        {{ item.tab }}
+                      </v-tab>
+                      <v-tab-item
+                        v-for="item in classInfo.items"
+                        :key="item.tab"
+                        :transition="false"
+                      >
+                        
+                      </v-tab-item>
+                    </v-tabs> -->
+            <div  class="videoLayout">
+                <video-player ref="video" :src="src" />
+                <div class="video-side">
+                    <v-btn-toggle v-model="toggle_exclusive">
+                        <v-btn active-class="active-btn" v-for="item in classInfo.items"  :key="item.tab">
+                            {{ item.tab }}
+                        </v-btn>
+                    </v-btn-toggle>
                 </div>
-              </v-tab-item>
-            </v-tabs>
-          </v-card>
+            </div>
+        </v-card>
         </v-col>
       </v-row>
     </v-parallax>
@@ -105,12 +104,15 @@
 
 <script>
 import Banner from "../../components/Banner.vue";
+import VideoPlayer from "@/components/VideoPlayer.vue";
 export default {
-  name: "ClassContent",
-  components: {
-    Banner,
-  },
-  data: () => ({
+    name: "ClassContent",
+    components: {
+        Banner,
+        VideoPlayer,
+    },
+    data: () => ({
+      src:'http://nettuts.s3.amazonaws.com/763_sammyJSIntro/trailer_test.mp4',
     activities: [
       {
         id: 1,
@@ -195,19 +197,39 @@ export default {
   flex-direction: row-reverse;
 }
 
-.videoContainer {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
+.videoLayout {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  background: rgba(254, 255, 250, 0.8);
 }
+.video-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.5rem;
+
+
+    .v-btn-toggle {
+        flex-direction: column;
+
+        button {
+            &:first-of-type {
+                margin-top: 5px;
+            }
+
+            margin-bottom: 5px;
+            border-radius: 2px !important;
+            border: 1px solid !important;
+        }
+    }
+}
+ .active-btn {
+     background: #ffb200 !important;
+     color: #fff !important;
+ }
 
 iframe {
   /* optional */

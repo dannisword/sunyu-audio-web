@@ -1,5 +1,5 @@
 <template>
-    <v-container fluid class="pa-0">
+    <v-container class="pa-0">
         <Banner />
         <v-row class="list-content">
             <v-col cols="12">

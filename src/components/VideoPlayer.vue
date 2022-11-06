@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <video ref="videoPlayer" class="video-js"></video>
-  </div>
+    <video ref="videoPlayer" class="video-js vjs-big-play-centered"></video>
 </template>
 
 <script>
@@ -11,7 +9,7 @@ export default {
   name: "VideoPlayer",
   props: {
     options: {
-      type: Object,
+          type: Object,
       default() {
         return {};
       },
@@ -29,8 +27,9 @@ export default {
     return {
       player: null,
       videoOptions: {
-        autoplay: false,
-        controls: true,
+          autoplay: false,
+          controls: true,
+          fluid:true,
         sources: [
           {
             src: "", //http://nettuts.s3.amazonaws.com/763_sammyJSIntro/trailer_test.mp4
