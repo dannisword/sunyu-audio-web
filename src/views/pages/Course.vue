@@ -258,7 +258,7 @@ export default {
 
     .v-btn-toggle {
             flex-direction: column;
-    
+            width: 100%;
             button {
                 &:first-of-type {
                     margin-top: 5px;
@@ -275,6 +275,10 @@ export default {
 @media screen and (max-width:768px) {
     .videoLayout {
         flex-direction: column;
+    }
+
+    .video-side {
+        width: 100%;
     }
 }
 
