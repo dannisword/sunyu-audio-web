@@ -301,6 +301,7 @@ export default {
   created() {
     let params = this.getParams(this.params.last);
     getLast(params).then((resp) => {
+      console.log(resp);
       this.last = resp;
     });
     params = this.getParams(this.params.half);
@@ -315,6 +316,7 @@ export default {
   },
   methods: {
     onNav(val) {
+      
       if (val.appendiies) {
         const unit = this.encoded(val.appendiies[0].filePath);
 
