@@ -279,6 +279,19 @@ export default {
 
     .video-side {
         width: 100%;
+        flex-direction: row;
+        .v-btn-toggle {
+            flex-direction: row;
+            align-items: center;
+            button {
+                    &:first-of-type {
+                        margin: 0 5px;
+                    }
+            
+                    margin-right: 5px;
+                    margin-bottom: 0;
+                }
+        }
     }
 }
 
