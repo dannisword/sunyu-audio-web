@@ -1,5 +1,5 @@
 <template>
-    <video ref="videoPlayer" class="video-js vjs-big-play-centered"></video>
+  <video ref="videoPlayer" class="video-js vjs-big-play-centered"></video>
 </template>
 
 <script>
@@ -9,7 +9,7 @@ export default {
   name: "VideoPlayer",
   props: {
     options: {
-          type: Object,
+      type: Object,
       default() {
         return {};
       },
@@ -27,32 +27,40 @@ export default {
     return {
       player: null,
       videoOptions: {
-          autoplay: false,
-          controls: true,
-          fluid:true,
+        autoplay: false,
+        controls: true,
+        fluid: true,
         sources: [
           {
-            src: "", //http://nettuts.s3.amazonaws.com/763_sammyJSIntro/trailer_test.mp4
+            src: "", //"http://nettuts.s3.amazonaws.com/763_sammyJSIntro/trailer_test.mp4",
             type: "video/mp4",
           },
         ],
       },
     };
   },
+  created() {},
   mounted() {
-    this.videoOptions.sources[0].src = this.src;
-    this.player = videojs(
-      this.$refs.videoPlayer,
-      this.videoOptions,
-      function onPlayerReady() {
-        console.log("onPlayerReady", this);
-      }
-    );
+    // 再一次渲染
+    this.$nextTick(() => {});
+  },
+  watch: {
+    src(newVal, oldVal) {
+      this.videoOptions.sources[0].src = newVal;
+
+      this.player = videojs(
+        this.$refs.videoPlayer,
+        this.videoOptions,
+        function onPlayerReady() {
+          console.log("onPlayerReady", this);
+        }
+      );
+    },
   },
   methods: {
     onAction() {
       this.player.pause();
-      this.$emit("on-action");
+      //this.$emit("on-action");
     },
   },
   beforeDestroy() {

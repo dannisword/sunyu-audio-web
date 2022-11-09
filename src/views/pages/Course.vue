@@ -32,14 +32,19 @@
               </v-tab-item>
             </v-tabs> -->
             <div class="videoLayout">
-                <video-player ref="video" :src="current.filePath"/>
-                <div class="video-side">
-                        <v-btn-toggle v-model="toggle_exclusive">
-                            <v-btn active-class="active-btn" v-for="item in course.appendiies" :key="item.seq" @click="onChang(item)">
-                                {{ item.unit }}
-                            </v-btn>
-                        </v-btn-toggle>
-                </div>
+              <video-player ref="video" :src="current.filePath" />
+              <div class="video-side">
+                <v-btn-toggle>
+                  <v-btn
+                    active-class="active-btn"
+                    v-for="item in course.appendiies"
+                    :key="item.seq"
+                    @click="onChang(item)"
+                  >
+                    {{ item.unit }}
+                  </v-btn>
+                </v-btn-toggle>
+              </div>
             </div>
           </v-card>
         </v-col>
@@ -123,14 +128,16 @@ export default {
   mixins: [pageMixin],
   data() {
     return {
-        course: {},
-        current:{},
-        videoOptions: {
+      course: {},
+      current: {},
+      src: "",
+      videoOptions: {
         autoplay: false,
         controls: true,
+        fluid: true,
         sources: [
           {
-            src: "", //http://nettuts.s3.amazonaws.com/763_sammyJSIntro/trailer_test.mp4
+            src: "", 
             type: "video/mp4",
           },
         ],
@@ -163,30 +170,20 @@ export default {
     };
   },
   created() {
-      getCourse(this.$route.params.Seq).then((res) => {
-          this.current = res.appendiies[0];
-          this.course = res;
+    getCourse(this.$route.params.Seq).then((res) => {
+      this.course = res;
+      this.current = res.appendiies[0];
     });
   },
-  watch: {
-      async $route(to, from) {
-          const unit = this.decoded(from.params.Unit);
-      await this.pause(unit);
-    },
-  },
   methods: {
-      onChang(val) {
-          console.log('val', val);
-          this.current = val;
-          const unit = this.encoded(this.current.filePath);
-          const uri = `/Course/${this.$route.params.Seq}/${unit}`;
-          this.encoded(this.current.filePath);
-          this.$router.push(uri).catch((e) => {
-      });
+    onChang(val) {
+      this.src = val.filePath;
+      this.changSource(val.filePath);
     },
-    async pause(unit) {
-        var video = this.$refs.video.filter((x) => x.src == unit);
-      video[0].player.pause();
+    changSource(url) {
+      var video = this.$refs.video;
+      video.player.pause();
+      video.player.src(url);
     },
   },
   beforeDestroy() {
@@ -229,9 +226,9 @@ export default {
 }
 
 .parallax-wrap {
-    width: 100vw;
-    margin: 100px -12px -12px -12px;
-    height: 100% !important;
+  width: 100vw;
+  margin: 100px -12px -12px -12px;
+  height: 100% !important;
 }
 .v-tabs--vertical > .v-window {
   height: 390px;
@@ -242,82 +239,80 @@ export default {
 }
 
 .videoLayout {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-start;
-    margin-bottom: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  margin-bottom: 2rem;
 }
 
 .video-side {
-    display: flex;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+
+  .v-btn-toggle {
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem;
+    width: 100%;
+    button {
+      &:first-of-type {
+        margin-top: 5px;
+      }
 
+      margin-bottom: 5px;
+      border-radius: 2px !important;
+      border: 1px solid !important;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .videoLayout {
+    flex-direction: column;
+  }
+
+  .video-side {
+    width: 100%;
+    flex-direction: row;
     .v-btn-toggle {
-            flex-direction: column;
-            width: 100%;
-            button {
-                &:first-of-type {
-                    margin-top: 5px;
-                }
-    
-                margin-bottom: 5px;
-                border-radius: 2px !important;
-                border: 1px solid !important;
-            }
+      flex-direction: row;
+      align-items: center;
+      button {
+        &:first-of-type {
+          margin: 0 5px;
         }
 
-}
-
-@media screen and (max-width:768px) {
-    .videoLayout {
-        flex-direction: column;
+        margin-right: 5px;
+        margin-bottom: 0;
+      }
     }
-
-    .video-side {
-        width: 100%;
-        flex-direction: row;
-        .v-btn-toggle {
-            flex-direction: row;
-            align-items: center;
-            button {
-                    &:first-of-type {
-                        margin: 0 5px;
-                    }
-            
-                    margin-right: 5px;
-                    margin-bottom: 0;
-                }
-        }
-    }
+  }
 }
-
 
 .active-btn {
+  background: #ffb200 !important;
+  color: #fff !important;
+  &:focus::before {
     background: #ffb200 !important;
-        color: #fff !important;
-    &:focus::before {
-        background: #ffb200 !important;
-        color: #fff !important;
-        opacity: 1 !important;
-    }
+    color: #fff !important;
+    opacity: 1 !important;
+  }
 
-    &:hover,
-    &:active,
-    &:focus,
-    &:visited,
-    &:target {
-        background: #ffb200 !important;
-        color: #fff !important;
-    }
+  &:hover,
+  &:active,
+  &:focus,
+  &:visited,
+  &:target {
+    background: #ffb200 !important;
+    color: #fff !important;
+  }
 
-    &:first-of-type {
-        margin-top: 5px;
-    }
-    margin-bottom: 10px;
+  &:first-of-type {
+    margin-top: 5px;
+  }
+  margin-bottom: 10px;
 }
 
 iframe {
