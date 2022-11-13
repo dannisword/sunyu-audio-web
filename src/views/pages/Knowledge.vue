@@ -1,5 +1,5 @@
 <template>
-  <v-container class="pa-0">
+  <v-container class="pa-10">
     <Banner />
     <!-- 最新上架 -->
     <v-row align="center" class="list-content">

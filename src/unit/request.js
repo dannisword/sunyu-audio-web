@@ -4,7 +4,7 @@ import axios from "axios";
 
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
-  timeout: 5000,
+  timeout: 10000,
 });
 function parseBody(response) {
   if (response.status === 200) {
@@ -15,12 +15,6 @@ function parseBody(response) {
 }
 function parseError(response) {
   if (response.status == 404) {
-    /*
-    Message({
-      message: "服務不存在",
-      type: "warning",
-      duration: 5000,
-    });*/
     console.log("服務不存在");
     return;
 
@@ -72,7 +66,8 @@ service.interceptors.response.use(
     return parseBody(response);
   },
   (error) => {
-    parseError(error.response);
+    //parseError(error.response);
+    console.log(error);
     return Promise.reject(error);
   }
 );

@@ -52,7 +52,7 @@ export default {
         this.$refs.videoPlayer,
         this.videoOptions,
         function onPlayerReady() {
-          console.log("onPlayerReady", this);
+          //console.log("onPlayerReady", this);
         }
       );
     },

@@ -12,27 +12,8 @@
             {{ course.courseName }}
           </h1>
           <v-card>
-            <!-- <v-tabs color="deep-purple accent-4" vertical>
-              <v-tab
-                v-for="item in course.appendiies"
-                :key="item.seq"
-                @click="onChang(item)"
-              >
-                {{ item.unit }}
-              </v-tab>
-              <v-tab-item
-                v-for="item in course.appendiies"
-                :key="item.seq"
-                :transition="false"
-                class="fade"
-              >
-                <div class="videoContainer">
-                  <video-player ref="video" :src="item.filePath" />
-                </div>
-              </v-tab-item>
-            </v-tabs> -->
             <div class="videoLayout">
-              <video-player ref="video" :src="current.filePath" />
+              <video-player ref="video" :src="videoPath" />
               <div class="video-side">
                 <v-btn-toggle>
                   <v-btn
@@ -61,7 +42,8 @@
               >
             </v-list-item-content>
           </v-list-item>
-
+          <span v-html="course.courseMemo"></span>
+          <!-- 
           <v-list-item two-line v-for="(tip, i) in classInfo.tips">
             <v-list-item-content>
               <v-list-item-title
@@ -72,8 +54,10 @@
               >
             </v-list-item-content>
           </v-list-item>
+          -->
         </v-card>
       </v-col>
+      <!-- 教師資訊 -->
       <v-col md="4">
         <v-card width="400" class="mx-auto pa-4 mt-5" elevation="2" outlined>
           <v-img
@@ -105,7 +89,7 @@
           </v-card-actions>
           <v-card-text>
             <div class="subtitle-2">
-              {{ classInfo.teacherInfo }}
+              <span v-html="course.authorMemo"></span>
             </div>
           </v-card-text>
         </v-card>
@@ -117,7 +101,7 @@
 import Banner from "@/components/Banner.vue";
 import VideoPlayer from "@/components/VideoPlayer.vue";
 import pageMixin from "@/unit/pageMixin";
-import { getCourse } from "@/api/course";
+import { getCourse, setViewHistory, getViewHistory } from "@/api/course";
 
 export default {
   name: "Course",
@@ -129,15 +113,15 @@ export default {
   data() {
     return {
       course: {},
-      current: {},
-      src: "",
+      appendix: {},
+      videoPath: "",
       videoOptions: {
         autoplay: false,
         controls: true,
         fluid: true,
         sources: [
           {
-            src: "", 
+            src: "",
             type: "video/mp4",
           },
         ],
@@ -170,24 +154,63 @@ export default {
     };
   },
   created() {
-    getCourse(this.$route.params.Seq).then((res) => {
-      this.course = res;
-      this.current = res.appendiies[0];
-    });
+    this.onLoad();
+  },
+  computed: {
+    video() {
+      return this.$refs.video.player;
+    },
+  },
+  watch: {
+    appendix(newVal, oldVal) {
+      console.log(newVal);
+      if (oldVal.seq != undefined) {
+        // 存檔
+        this.save(oldVal, this.video.currentTime());
+      }
+      this.play();
+    },
   },
   methods: {
-    onChang(val) {
-      this.src = val.filePath;
-      this.changSource(val.filePath);
+    onLoad: async function () {
+      getCourse(this.$route.params.Seq).then((resp) => {
+        this.course = resp;
+        this.appendix = resp.appendiies[0];
+      });
     },
-    changSource(url) {
-      var video = this.$refs.video;
-      video.player.pause();
-      video.player.src(url);
+    onChang: async function (val) {
+      // 觀看紀錄
+      this.video.pause();
+      this.appendix = val;
+    },
+    play: function () {
+      this.videoPath = `${process.env.VUE_APP_VIDEO_PATH}${this.appendix.filePath}${this.appendix.fileName}`;
+      // 紀錄
+      this.$nextTick(async () => {
+        var resp = await getViewHistory(
+          this.appendix.courseSeq,
+          this.appendix.seq
+        );
+        if (this.video == null) {
+          return;
+        }
+        this.video.src(this.videoPath);
+        this.video.currentTime(resp.viewLastTime);
+      });
+    },
+    save(appendix, second) {
+      const data = {
+        seq: 0,
+        courseSeq: appendix.courseSeq,
+        appendixSeq: appendix.seq,
+        viewLastTime: second,
+        deleteTag: 0,
+      };
+      setViewHistory(data).then((resp) => {});
     },
   },
   beforeDestroy() {
-    //console.log("beforeDestroy");
+    this.save(this.appendix, this.video.currentTime());
   },
   destroyed() {
     //console.log("destroyed");

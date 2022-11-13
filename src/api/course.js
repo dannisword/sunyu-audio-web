@@ -24,8 +24,8 @@ export function getHalf(params) {
 }
 /**
  * 全部課程
- * @param {*} params 
- * @returns 
+ * @param {*} params
+ * @returns
  */
 export function getMine(params) {
   return request({
@@ -34,9 +34,9 @@ export function getMine(params) {
   });
 }
 /**
- * 
- * @param {*} seq 
- * @returns 
+ *
+ * @param {*} seq
+ * @returns
  */
 export function getCourse(seq) {
   return request({
@@ -44,4 +44,39 @@ export function getCourse(seq) {
     method: "Get",
   });
 }
-getCourse
+
+/**
+ *
+ * @param {*} courseSeq
+ * @returns
+ */
+export function getViewHistories(courseSeq) {
+  return request({
+    url: `/v1/Course/ViewHistories/${courseSeq}`,
+    method: "GET",
+  });
+}
+/**
+ * 
+ * @param {*} courseSeq 
+ * @param {*} appendixSeq 
+ * @returns 
+ */
+export function getViewHistory(courseSeq, appendixSeq) {
+  return request({
+    url: `/v1/Course/ViewHistory/${courseSeq}/${appendixSeq}`,
+    method: "GET",
+  });
+}
+/**
+ * 觀看紀錄
+ * @param {*} data
+ * @returns
+ */
+export function setViewHistory(data) {
+  return request({
+    url: `/v1/Course/ViewHistory`,
+    method: "POST",
+    data,
+  });
+}
