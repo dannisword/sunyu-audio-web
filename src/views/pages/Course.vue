@@ -250,7 +250,7 @@ export default {
 
 .parallax-wrap {
   width: 100vw;
-  margin: 100px -12px -12px -12px;
+  margin: 64px -12px -12px -12px;
   height: 100% !important;
 }
 .v-tabs--vertical > .v-window {
