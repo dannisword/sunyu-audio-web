@@ -1,6 +1,17 @@
 import request from "@/unit/request";
 
 /**
+ * 
+ * @param {*} userSeq 
+ * @returns 
+ */
+export function getUser(userSeq) {
+  return request({
+    url: `/v1/User/${userSeq}`,
+    method: "Get",
+  });
+}
+/**
  * 最新上架
  * @param {*} params
  * @returns

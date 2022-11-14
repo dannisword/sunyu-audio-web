@@ -300,9 +300,13 @@ export default {
   }),
   created() {
     let params = this.getParams(this.params.last);
+    
     getLast(params).then((resp) => {
-      console.log(resp);
-      this.last = resp;
+      if (resp.resultCode == 10){
+        this.last = resp.content;
+      }else{
+        this.last = [];
+      }
     });
     params = this.getParams(this.params.half);
     getHalf(params).then((resp) => {
@@ -310,7 +314,12 @@ export default {
     });
     params = this.getParams(this.params.mine);
     getMine(params).then((resp) => {
-      this.mine = resp;
+      //this.mine = resp;
+      if (resp.resultCode == 10){
+        this.mine = resp.content;
+      }else{
+        this.mine = [];
+      }
     });
     // all
   },

@@ -165,9 +165,7 @@ export default {
   },
   watch: {
     appendix(newVal, oldVal) {
-      console.log(newVal);
       if (oldVal.seq != undefined) {
-        // 存檔
         this.save(oldVal, this.video.currentTime());
       }
       this.play();
@@ -213,9 +211,6 @@ export default {
   },
   beforeDestroy() {
     this.save(this.appendix, this.video.currentTime());
-  },
-  destroyed() {
-    //console.log("destroyed");
   },
 };
 </script>
