@@ -1,29 +1,35 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="12" md="4" sm="6" v-for="appItem in appItems" :key="appItem.id">
-        <router-link :to="appItem.path" custom>
-          <v-card elevation="3" outlined>
-            <v-img :src="appItem.imgUrl"></v-img>
-            <v-card-text class="pa-5">
-              <div class="d-sm-flex align-center">
-                <h3
-                  class="title blue-grey--text text--darken-2 font-weight-bold"
-                >
-                  {{ appItem.title }}
-                </h3>
-              </div>
-            </v-card-text>
-          </v-card>
-        </router-link>
+      <v-col
+        cols="12"
+        md="4"
+        sm="6"
+        v-for="appItem in appItems"
+        :key="appItem.id"
+      >
+        <v-card elevation="3" outlined @click="onNav(appItem)">
+          <v-img :src="appItem.imgUrl"></v-img>
+          <v-card-text class="pa-5">
+            <div class="d-sm-flex align-center">
+              <h3 class="title blue-grey--text text--darken-2 font-weight-bold">
+                {{ appItem.title }}
+              </h3>
+            </div>
+          </v-card-text>
+        </v-card>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
+import { getUser } from "@/api/course";
+import pageMixin from "@/unit/pageMixin";
+
 export default {
   name: "Dashboard",
+  mixins: [pageMixin],
   data: () => ({
     appItems: [
       {
@@ -64,8 +70,18 @@ export default {
       },
     ],
   }),
+  created() {
+    this.clear();
+    getUser(1).then((resp) => {
+      if (resp.resultCode == 10) {
+        this.setUser(resp.content);
+      }
+    });
+  },
   methods: {
-    create() {},
+    onNav(val) {
+      this.$router.push(val.path);
+    },
   },
 };
 </script>

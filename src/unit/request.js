@@ -2,6 +2,14 @@ import axios from "axios";
 
 //import { getUserInfo, getToken } from "./localStorage";
 
+function getToken() {
+  var data = localStorage.getItem("userInfo");
+  var user = JSON.parse(data);
+  if (user) {
+    return user.token;
+  }
+  return undefined;
+}
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
   timeout: 10000,
@@ -17,7 +25,6 @@ function parseError(response) {
   if (response.status == 404) {
     console.log("服務不存在");
     return;
-
   }
   if (response.status == 500) {
     /*
@@ -48,10 +55,10 @@ function parseError(response) {
 service.interceptors.request.use(
   (config) => {
     // 驗證
-    //const token = getToken();
-    //if (token !== null) {
-    //  config.headers["Authorization"] = token;
-    //}
+    const token = getToken();
+    if (token !== undefined) {
+      config.headers["Authorization"] = token;
+    }
     return config;
   },
   (error) => {

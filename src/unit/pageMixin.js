@@ -22,6 +22,13 @@ export default {
     },
   },
   methods: {
+    setUser(user) {
+      var data = JSON.stringify(user);
+      localStorage.setItem("userInfo", data);
+    },
+    clear() {
+      localStorage.clear();
+    },
     encoded(val) {
       return window.btoa(val);
     },
