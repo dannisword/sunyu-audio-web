@@ -1,14 +1,10 @@
 <template>
   <v-container fluid class="pa-0">
     <Banner></Banner>
-    <v-parallax
-      dark
-      src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
-      class="parallax-wrap"
-    >
+    <div class="parallax-wrap">
       <v-row align="center" justify="center">
         <v-col class="text-center" md="10" lg="10" xl="8">
-          <h1 class="text-h4 font-weight-bold mb-4 mt-4 pt-5">
+          <h1 class="text-h5 font-weight-bold mb-4 mt-4 pt-5">
             {{ course.courseName }}
           </h1>
           <v-card>
@@ -30,7 +26,7 @@
           </v-card>
         </v-col>
       </v-row>
-    </v-parallax>
+    </div>
     <v-container>
     <v-row>
       <v-col md="8">
@@ -246,10 +242,22 @@ export default {
 }
 
 .parallax-wrap {
-  width: 100vw;
-  margin: 64px -12px -12px -12px;
-  height: 100% !important;
+    width: 100vw;
+    margin: 100px -12px -12px -12px;
+    background: url('../../assets/lesson01_bg_blur.png') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+
+    h1 {
+        color: #fff;
+        font-size: 2rem;
+    }
+
+    .row {
+        margin: 0;
+    }
 }
+
 .v-tabs--vertical > .v-window {
   height: 390px;
 }
@@ -265,10 +273,7 @@ export default {
   align-items: flex-start;
   margin-bottom: 2rem;
 }
-.v-parallax__image {
-    width: 100vw;
-    height: 100vh;
-}
+
 .video-side {
   display: flex;
   flex-direction: column;

@@ -17,7 +17,7 @@
         </v-card>
       </v-col>
 
-      <v-col cols="12" lg="3" md="6" sm="6" v-for="item in last" text>
+      <v-col cols="12" md="4" sm="6" v-for="item in last" text>
         <v-card elevation="3" outlined @click="onNav(item)">
           <v-img src="@/assets/lesson01_bg.png"> </v-img>
           <v-card-title
