@@ -4,18 +4,19 @@
 //   }
 // }
 a {
-    text-decoration: none;
-}
-.header-img {
-    background: url(/src/assets/navbar-bg-04.png) no-repeat left center;
-    background-size: cover;
+  text-decoration: none;
 }
 
-  .logo-text {
-    img {
-        height: 50px;
-    }
+.header-img {
+  background: url(/src/assets/navbar-bg-04.png) no-repeat left center;
+  background-size: cover;
+}
+
+.logo-text {
+  img {
+    height: 50px;
   }
+}
 
 .v-application--is-ltr .v-list-item__icon:first-child {
   margin-right: 10px;
@@ -44,5 +45,6 @@ a {
 
 .v-sheet.v-app-bar.v-toolbar:not(.v-sheet--outlined),
 .v-sheet.v-card:not(.v-sheet--outlined) {
-  box-shadow: $box-shadow  !important;
+  box-shadow: $box-shadow !important;
 }
+

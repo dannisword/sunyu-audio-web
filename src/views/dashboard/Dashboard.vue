@@ -72,7 +72,7 @@ export default {
   }),
   created() {
     this.clear();
-    getUser(1).then((resp) => {
+    getUser(3).then((resp) => {
       if (resp.resultCode == 10) {
         this.setUser(resp.content);
       }

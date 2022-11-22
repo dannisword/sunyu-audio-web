@@ -28,7 +28,7 @@ const router = new VueRouter({
                 },
                 {
                     name: 'Course',
-                    path: '/Course/:Seq/:Unit',
+                    path: '/Course/:Seq',
                     meta: { title: '產業創新知識庫' },
                     component: () => import('@/views/pages/Course'),
                 },

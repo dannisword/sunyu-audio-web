@@ -91,3 +91,15 @@ export function setViewHistory(data) {
     data,
   });
 }
+
+/**
+ * 觀看紀錄-結束
+ * @param {*} seq 
+ * @returns 
+ */
+export function setViewHistoryEnd(seq) {
+  return request({
+    url: `/v1/Course/ViewHistory/End/${seq}`,
+    method: "PUT"
+  });
+}

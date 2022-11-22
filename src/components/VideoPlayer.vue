@@ -55,12 +55,17 @@ export default {
           //console.log("onPlayerReady", this);
         }
       );
+
+      this.player.on("ended", this.onEnd)
     },
   },
   methods: {
-    onAction() {
-      this.player.pause();
-      //this.$emit("on-action");
+    onAction(mode) {
+      //this.player.
+      this.$emit("on-action", mode);
+    },
+    onEnd() {
+      this.$emit("on-action", "end");
     },
   },
   beforeDestroy() {

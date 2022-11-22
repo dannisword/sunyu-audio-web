@@ -9,7 +9,11 @@
           </h1>
           <v-card>
             <div class="videoLayout">
-              <video-player ref="video" :src="videoPath" />
+              <video-player
+                ref="video"
+                :src="videoPath"
+                @on-action="onAction"
+              />
               <div class="video-side">
                 <v-btn-toggle>
                   <v-btn
@@ -28,70 +32,58 @@
       </v-row>
     </div>
     <v-container>
-    <v-row>
-      <v-col md="8">
-        <v-card class="mx-auto pa-4 mt-5">
-          <v-list-item>
-            <v-list-item-content>
-              <v-list-item-title
-                class="title amber--text text--darken-2 font-weight-bold mb-2"
-                >本期重點</v-list-item-title
-              >
-            </v-list-item-content>
-          </v-list-item>
-          <span v-html="course.courseMemo"></span>
-          <!-- 
-          <v-list-item two-line v-for="(tip, i) in classInfo.tips">
-            <v-list-item-content>
-              <v-list-item-title
-                ><span
-                  class="text-h4 amber--text text--darken-2 font-weight-bold mr-3"
-                  >{{ i + 1 }}</span
-                >{{ tip.content }}</v-list-item-title
-              >
-            </v-list-item-content>
-          </v-list-item>
-          -->
-        </v-card>
-      </v-col>
-      <!-- 教師資訊 -->
-      <v-col md="4">
-        <v-card width="400" class="mx-auto pa-4 mt-5" elevation="2" outlined>
-          <v-img
-            height="150px"
-            src="https://cdn.pixabay.com/photo/2020/07/12/07/47/bee-5396362_1280.jpg"
-          >
-            <v-card-title
-              class="white--text d-flex align-center flex-column justify-center mt-2"
-            >
-              <v-avatar size="80">
-                <img alt="user" :src="classInfo.teacherUrl" />
-              </v-avatar>
-              <p class="text-h6">
-                {{ classInfo.teacherName }}
-              </p>
-            </v-card-title>
-          </v-img>
-          <v-card-actions>
-            <v-list-item class="grow">
-              <v-row align="center" justify="center">
-                <v-icon class="mr-1 amber--text text--darken-2t">
-                  mdi-facebook
-                </v-icon>
-                <v-icon class="mr-1 amber--text text--darken-2">
-                  mdi-youtube
-                </v-icon>
-              </v-row>
+      <v-row>
+        <v-col md="8">
+          <v-card class="mx-auto pa-4 mt-5">
+            <v-list-item>
+              <v-list-item-content>
+                <v-list-item-title
+                  class="title amber--text text--darken-2 font-weight-bold mb-2"
+                  >本期重點</v-list-item-title
+                >
+              </v-list-item-content>
             </v-list-item>
-          </v-card-actions>
-          <v-card-text>
-            <div class="subtitle-2">
-              <span v-html="course.authorMemo"></span>
-            </div>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
+            <span v-html="course.courseMemo"></span>
+          </v-card>
+        </v-col>
+        <!-- 教師資訊 -->
+        <v-col md="4">
+          <v-card width="400" class="mx-auto pa-4 mt-5" elevation="2" outlined>
+            <v-img
+              height="150px"
+              src="https://cdn.pixabay.com/photo/2020/07/12/07/47/bee-5396362_1280.jpg"
+            >
+              <v-card-title
+                class="white--text d-flex align-center flex-column justify-center mt-2"
+              >
+                <v-avatar size="80">
+                  <img alt="user" :src="course.teacherUrl" />
+                </v-avatar>
+                <p class="text-h6">
+                  {{ course.teacherName }}
+                </p>
+              </v-card-title>
+            </v-img>
+            <v-card-actions>
+              <v-list-item class="grow">
+                <v-row align="center" justify="center">
+                  <v-icon class="mr-1 amber--text text--darken-2t">
+                    mdi-facebook
+                  </v-icon>
+                  <v-icon class="mr-1 amber--text text--darken-2">
+                    mdi-youtube
+                  </v-icon>
+                </v-row>
+              </v-list-item>
+            </v-card-actions>
+            <v-card-text>
+              <div class="subtitle-2">
+                <span v-html="course.authorMemo"></span>
+              </div>
+            </v-card-text>
+          </v-card>
+        </v-col>
+      </v-row>
     </v-container>
   </v-container>
 </template>
@@ -99,7 +91,12 @@
 import Banner from "@/components/Banner.vue";
 import VideoPlayer from "@/components/VideoPlayer.vue";
 import pageMixin from "@/unit/pageMixin";
-import { getCourse, setViewHistory, getViewHistory } from "@/api/course";
+import {
+  getCourse,
+  setViewHistory,
+  getViewHistory,
+  setViewHistoryEnd,
+} from "@/api/course";
 
 export default {
   name: "Course",
@@ -112,6 +109,7 @@ export default {
     return {
       course: {},
       appendix: {},
+      viewHistory: {},
       videoPath: "",
       videoOptions: {
         autoplay: false,
@@ -122,31 +120,6 @@ export default {
             src: "",
             type: "video/mp4",
           },
-        ],
-      },
-      classInfo: {
-        classTitle: "AutoMedia 影片教材大師",
-        teacherUrl: require("@/assets/teacher01.png"),
-        teacherName: "AutoMedia",
-        teacherInfo: "影片教材大師，擁有獨家專利AI智能配音技術，將簡報變成影片",
-        tips: [
-          {
-            content:
-              "數位學習服務：數位教材製作 / 線上學習系統 / 影片教材大師AutoMedia",
-          },
-          {
-            content:
-              "資訊軟體開發：票務自動化系統 / 人力資源管理系統 / 會計管理系統",
-          },
-          {
-            content: "人工智慧應用：AI語音合成技術 / 客服機器人 / 多元整合服務",
-          },
-        ],
-        items: [
-          { tab: "第 1 章", url: "https://www.youtube.com/embed/EjtJt7-i2VM" },
-          { tab: "第 2 章", url: "https://www.youtube.com/embed/EjtJt7-i2VM" },
-          { tab: "第 3 章", url: "https://www.youtube.com/embed/EjtJt7-i2VM" },
-          { tab: "第 4 章", url: "https://www.youtube.com/embed/EjtJt7-i2VM" },
         ],
       },
     };
@@ -164,7 +137,8 @@ export default {
       if (oldVal.seq != undefined) {
         this.save(oldVal, this.video.currentTime());
       }
-      this.play();
+
+      this.setCurrentTime();
     },
   },
   methods: {
@@ -172,6 +146,8 @@ export default {
       getCourse(this.$route.params.Seq).then((resp) => {
         this.course = resp;
         this.appendix = resp.appendiies[0];
+        this.course.teacherUrl = `${this.course.authorImageType} ${this.course.authorImage}`;
+        this.course.teacherName = "AutoMedia";
       });
     },
     onChang: async function (val) {
@@ -179,7 +155,11 @@ export default {
       this.video.pause();
       this.appendix = val;
     },
-    play: function () {
+    onAction(val) {
+      setViewHistoryEnd(this.viewHistory.seq).then((resp) => {});
+      // 結束
+    },
+    setCurrentTime: function () {
       this.videoPath = `${process.env.VUE_APP_VIDEO_PATH}${this.appendix.filePath}${this.appendix.fileName}`;
       // 紀錄
       this.$nextTick(async () => {
@@ -189,6 +169,11 @@ export default {
         );
         if (this.video == null) {
           return;
+        }
+        this.viewHistory = resp;
+        console.log(resp);
+        if (this.viewHistory.seq == 0){
+          this.save(this.appendix, 0);
         }
         this.video.src(this.videoPath);
         this.video.currentTime(resp.viewLastTime);
@@ -205,8 +190,8 @@ export default {
       setViewHistory(data).then((resp) => {});
     },
   },
-  beforeDestroy() {
-    this.save(this.appendix, this.video.currentTime());
+  async beforeDestroy() {
+    await this.save(this.appendix, this.video.currentTime());
   },
 };
 </script>
@@ -242,20 +227,20 @@ export default {
 }
 
 .parallax-wrap {
-    width: 100vw;
-    margin: 100px -12px -12px -12px;
-    background: url('../../assets/lesson01_bg_blur.png') no-repeat center center;
-    background-size: cover;
-    background-attachment: fixed;
+  width: 100vw;
+  margin: 100px -12px -12px -12px;
+  background: url("../../assets/lesson01_bg_blur.png") no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
 
-    h1 {
-        color: #fff;
-        font-size: 2rem;
-    }
+  h1 {
+    color: #fff;
+    font-size: 2rem;
+  }
 
-    .row {
-        margin: 0;
-    }
+  .row {
+    margin: 0;
+  }
 }
 
 .v-tabs--vertical > .v-window {

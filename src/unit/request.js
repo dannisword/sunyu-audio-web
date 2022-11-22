@@ -56,8 +56,9 @@ service.interceptors.request.use(
   (config) => {
     // 驗證
     const token = getToken();
+
     if (token !== undefined) {
-      config.headers["Authorization"] = token;
+      config.headers["Authorization"] = `Bearer ${token}`;
     }
     return config;
   },
