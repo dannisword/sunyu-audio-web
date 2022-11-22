@@ -142,7 +142,8 @@ export default {
     right: 0;
     bottom: 0;
     width: 100%;
-    padding: 0.8rem;
+    padding: 0;
+    height: 100%;
 
 }
 .banner {
