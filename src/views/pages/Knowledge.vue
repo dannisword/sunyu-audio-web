@@ -1,5 +1,9 @@
 <template>
   <v-container class="pa-10">
+    <v-overlay :value="loading">
+      <v-progress-circular indeterminate color="primary"></v-progress-circular>
+    </v-overlay>
+
     <Banner />
     <!-- 最新上架 -->
     <v-row align="center" class="list-content">
@@ -180,6 +184,7 @@ export default {
     Banner,
   },
   data: () => ({
+    loading: false,
     params: {
       last: {
         currentPage: 1,
@@ -290,17 +295,24 @@ export default {
     });
   },
   async mounted() {
+    this.loading = true;
     setTimeout(async () => {
       let params = this.getParams(this.params.half);
       this.half = [];
-      const half = await getHalf(params);
-      if (half.resultCode == 10) {
-        this.half = half.content;
-        for (let item of this.half) {
-          item.src = `${item.courseImageType} ${item.courseImage}`;
-          item.authorSrc = `${item.authorImageType} ${item.authorImage}`;
-        }
-      }
+      getHalf(params)
+        .then((resp) => {
+          if (resp.resultCode == 10) {
+            this.half = resp.content;
+            for (let item of this.half) {
+              item.src = `${item.courseImageType} ${item.courseImage}`;
+              item.authorSrc = `${item.authorImageType} ${item.authorImage}`;
+            }
+          }
+          this.loading = false;
+        })
+        .catch((e) => {
+          this.loading = false;
+        });
     }, 1000);
   },
   methods: {
