@@ -337,11 +337,13 @@ export default {
 
 .lesson_pic {
   position: absolute;
-  top: 8%;
-  left: 50%;
-  transform: translate(-50%, -8%);
-  width: 85%;
-  height: 50%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
 }
 .banner {
   width: 100vw;
