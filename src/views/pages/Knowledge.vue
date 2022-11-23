@@ -253,20 +253,6 @@ export default {
     ],
   }),
   async created() {
-    /*
-    let params = this.getParams(this.params.half);
-    const half = await getHalf(params);
-    if (half.resultCode == 10) {
-      this.half = half.content;
-      for (let item of this.half) {
-        item.src = `${item.courseImageType} ${item.courseImage}`;
-        item.authorSrc = `${item.authorImageType} ${item.authorImage}`;
-      }
-    } else {
-      this.half = [];
-    }
-    */
-
     let params = this.getParams(this.params.last);
 
     getLast(params).then((resp) => {
@@ -337,13 +323,11 @@ export default {
 
 .lesson_pic {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  padding: 0;
+  top: 8%;
+  left: 50%;
+  transform: translate(-50%, -8%);
+  width: 85%;
+  height: 50%;
 }
 .banner {
   width: 100vw;

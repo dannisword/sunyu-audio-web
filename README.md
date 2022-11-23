@@ -43,5 +43,8 @@ npm install axios@1.1.3
 ## vue2 run
 npm run serve
 
+## 編譯
+npm run prod
+
 ## API
 http://59.126.242.4:9001/index.html
