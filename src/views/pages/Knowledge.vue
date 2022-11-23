@@ -36,7 +36,7 @@
                 <img alt="user" :src="item.authorSrc" />
               </v-avatar>
 
-              <div class="text-subtitle-1 ms-4">AutoMedia</div>
+              <div class="text-subtitle-1 ms-4">{{ item.authorName }}</div>
             </div>
           </v-card-text>
         </v-card>
@@ -73,7 +73,7 @@
                 <img alt="user" :src="item.authorSrc" />
               </v-avatar>
 
-              <div class="text-subtitle-1 ms-4">AutoMedia</div>
+              <div class="text-subtitle-1 ms-4">{{item.authorName}}</div>
             </div>
           </v-card-text>
         </v-card>
@@ -121,7 +121,7 @@
                 <img alt="user" :src="item.authorSrc" />
               </v-avatar>
 
-              <div class="text-subtitle-1 ms-4">AutoMedia</div>
+              <div class="text-subtitle-1 ms-4">{{item.authorName}}</div>
             </div>
           </v-card-text>
         </v-card>
