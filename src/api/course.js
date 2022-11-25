@@ -140,3 +140,10 @@ export function verifyToken(data) {
     //headers: { "Content-Type": "multipart/form-data" }, -- resfull fromform
   });
 }
+
+export function getMaps() {
+  return request({
+    url: `/v1/Course/Maps`,
+    method: "GET",
+  });
+}

@@ -228,7 +228,7 @@ export default {
 
 .parallax-wrap {
   width: 100vw;
-  margin: 100px -12px -12px -12px;
+  margin: 80px -12px -12px -12px;
   background: url("../../assets/lesson01_bg_blur.png") no-repeat center center;
   background-size: cover;
   background-attachment: fixed;

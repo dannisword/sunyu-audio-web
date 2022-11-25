@@ -6,13 +6,14 @@
           hide-delimiter-background
           delimiter-icon="mdi-minus"
           height="100"
-          :continuous="false"
-          :show-arrows="false"
+          :continuous="true"
+          :show-arrows="true"
+          :hide-delimiters="true"
         >
           <v-carousel-item
             v-for="activity in activities"
-            :key="activity.id"
-            :src="activity.imgUrl"
+            :key="activity.seq"
+            :src="activity.image"
           >
           </v-carousel-item>
         </v-carousel>
@@ -22,9 +23,12 @@
 </template>
 
 <script>
+import { getMaps } from "@/api/course";
+
 export default {
   name: "Banner",
   data: () => ({
+    img: "",
     activities: [
       {
         id: 1,
@@ -40,6 +44,15 @@ export default {
       },
     ],
   }),
+  created() {
+    getMaps().then((resp) => {
+      this.activities = resp;
+      for (let item of this.activities) {
+        item.imgSrc = `data:image/png;base64, ${item.image}`;
+      }
+      console.log(this.activities);
+    });
+  },
 };
 </script>
 
