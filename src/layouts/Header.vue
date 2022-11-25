@@ -38,11 +38,6 @@ export default {
         title: "我的課程",
         url: "/my-class",
       },
-      {
-        id: 3,
-        title: "學習中心",
-        url: "/learn-central",
-      },
     ],
     href() {
       return undefined;

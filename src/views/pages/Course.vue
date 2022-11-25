@@ -60,7 +60,7 @@
                   <img alt="user" :src="course.teacherUrl" />
                 </v-avatar>
                 <p class="text-h6">
-                  {{ course.teacherName }}
+                  {{ course.authorName }}
                 </p>
               </v-card-title>
             </v-img>
@@ -145,9 +145,10 @@ export default {
     onLoad: async function () {
       getCourse(this.$route.params.Seq).then((resp) => {
         this.course = resp;
-        this.appendix = resp.appendiies[0];
+        console.log(resp)
+        this.appendix = this.course.appendiies[0];
+
         this.course.teacherUrl = `${this.course.authorImageType} ${this.course.authorImage}`;
-        this.course.teacherName = "AutoMedia";
       });
     },
     onChang: async function (val) {
@@ -171,8 +172,7 @@ export default {
           return;
         }
         this.viewHistory = resp;
-        console.log(resp);
-        if (this.viewHistory.seq == 0){
+        if (this.viewHistory.seq == 0) {
           this.save(this.appendix, 0);
         }
         this.video.src(this.videoPath);

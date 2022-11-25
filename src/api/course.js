@@ -1,11 +1,11 @@
 import request from "@/unit/request";
 
 /**
- * 
- * @param {*} userSeq 
- * @returns 
+ *
+ * @param {*} userSeq
+ * @returns
  */
-export function getUser(userSeq) {
+export function getUser1(userSeq) {
   return request({
     url: `/v1/User/${userSeq}`,
     method: "Get",
@@ -68,10 +68,10 @@ export function getViewHistories(courseSeq) {
   });
 }
 /**
- * 
- * @param {*} courseSeq 
- * @param {*} appendixSeq 
- * @returns 
+ *
+ * @param {*} courseSeq
+ * @param {*} appendixSeq
+ * @returns
  */
 export function getViewHistory(courseSeq, appendixSeq) {
   return request({
@@ -94,12 +94,49 @@ export function setViewHistory(data) {
 
 /**
  * 觀看紀錄-結束
- * @param {*} seq 
- * @returns 
+ * @param {*} seq
+ * @returns
  */
 export function setViewHistoryEnd(seq) {
   return request({
     url: `/v1/Course/ViewHistory/End/${seq}`,
-    method: "PUT"
+    method: "PUT",
+  });
+}
+/**
+ *
+ * @param {*} account
+ * @param {*} password
+ * @returns
+ */
+export function getToken(account, password) {
+  return request({
+    url: `/v1/Verify/Token/${account}/${password}`,
+    method: "GET",
+  });
+}
+/**
+ *
+ * @param {*} account
+ * @param {*} password
+ * @returns
+ */
+export function getUser() {
+  return request({
+    url: `/v1/Verify/GetUser`,
+    method: "GET",
+  });
+}
+/**
+ *
+ * @param {*} data
+ * @returns
+ */
+export function verifyToken(data) {
+  return request({
+    url: `/v1/Verify/Token`,
+    method: "POST",
+    data: data,
+    //headers: { "Content-Type": "multipart/form-data" }, -- resfull fromform
   });
 }

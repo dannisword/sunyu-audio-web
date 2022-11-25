@@ -1,3 +1,4 @@
+import { isExpiry } from "./verify";
 export default {
   name: "pageMixin",
   computed: {
@@ -23,8 +24,18 @@ export default {
   },
   methods: {
     setUser(user) {
-      var data = JSON.stringify(user);
-      localStorage.setItem("userInfo", data);
+      return new Promise((resolve, reject) => {
+        var data = JSON.stringify(user);
+        localStorage.setItem("userInfo", data);
+        resolve(true);
+      });
+    },
+    getUser() {
+      var data = localStorage.getItem("userInfo");
+      return JSON.parse(data);
+    },
+    verify() {
+      return isExpiry();
     },
     clear() {
       localStorage.clear();

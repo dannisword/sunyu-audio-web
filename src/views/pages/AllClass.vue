@@ -73,7 +73,7 @@
                 <img alt="user" :src="item.authorSrc" />
               </v-avatar>
 
-              <div class="text-subtitle-1 ms-4">{{item.authorName}}</div>
+              <div class="text-subtitle-1 ms-4">{{ item.authorName }}</div>
             </div>
           </v-card-text>
         </v-card>
@@ -121,7 +121,7 @@
                 <img alt="user" :src="item.authorSrc" />
               </v-avatar>
 
-              <div class="text-subtitle-1 ms-4">{{item.authorName}}</div>
+              <div class="text-subtitle-1 ms-4">{{ item.authorName }}</div>
             </div>
           </v-card-text>
         </v-card>
@@ -173,12 +173,19 @@
 </template>
 
 <script>
-import { getLast, getHalf, getMine } from "@/api/course";
+import {
+  getLast,
+  getHalf,
+  getMine,
+  getToken,
+  getUser,
+  verifyToken,
+} from "@/api/course";
 import Banner from "../../components/Banner.vue";
 import pageMixin from "@/unit/pageMixin";
 
 export default {
-  name: "Knowledge",
+  name: "AllClass",
   mixins: [pageMixin],
   components: {
     Banner,
@@ -253,57 +260,96 @@ export default {
     ],
   }),
   async created() {
-    let params = this.getParams(this.params.last);
-
-    getLast(params).then((resp) => {
-      if (resp.resultCode == 10) {
-        this.last = resp.content;
-        for (let item of this.last) {
-          item.src = `${item.courseImageType} ${item.courseImage}`;
-          item.authorSrc = `${item.authorImageType} ${item.authorImage}`;
-        }
-      } else {
-        this.last = [];
+    // 已有驗證
+    if (this.$route.params.token === undefined) {
+      const user = this.getUser();
+      if (user == null) {
+        return;
       }
-    });
-
-    params = this.getParams(this.params.mine);
-    getMine(params).then((resp) => {
+      this.onLoad();
+      return;
+    }
+    // from data
+    // 驗證
+    const data = {
+      token: this.$route.params.token,
+    };
+    verifyToken(data).then((resp) => {
       if (resp.resultCode == 10) {
-        this.mine = resp.content;
-        for (let item of this.mine) {
-          item.src = `${item.courseImageType} ${item.courseImage}`;
-          item.authorSrc = `${item.authorImageType} ${item.authorImage}`;
-        }
-      } else {
-        this.mine = [];
-      }
-    });
-  },
-  async mounted() {
-    this.loading = true;
-    setTimeout(async () => {
-      let params = this.getParams(this.params.half);
-      this.half = [];
-      getHalf(params)
-        .then((resp) => {
-          if (resp.resultCode == 10) {
-            this.half = resp.content;
-            for (let item of this.half) {
-              item.src = `${item.courseImageType} ${item.courseImage}`;
-              item.authorSrc = `${item.authorImageType} ${item.authorImage}`;
-            }
-          }
-          this.loading = false;
-        })
-        .catch((e) => {
-          this.loading = false;
+        this.setUser(resp.content).then((resp) => {
+          this.onLoad();
+          return;
         });
-    }, 1000);
+      }
+    });
+
+    // 重新登入
+    if (this.$route.params.account.length > 0) {
+      this.clear();
+      await getToken(
+        this.$route.params.account,
+        this.$route.params.password
+      ).then((resp) => {
+        console.log(resp);
+        if (resp.resultCode == 10) {
+          this.setUser(resp.content);
+          this.onLoad();
+        }
+      });
+    }
   },
+  async mounted() {},
   methods: {
+    onLoad() {
+      this.loading = true;
+      let params = this.getParams(this.params.last);
+
+      getLast(params).then((resp) => {
+        if (resp.resultCode == 10) {
+          this.last = resp.content;
+          for (let item of this.last) {
+            item.src = `${item.courseImageType} ${item.courseImage}`;
+            item.authorSrc = `${item.authorImageType} ${item.authorImage}`;
+          }
+        } else {
+          this.last = [];
+        }
+      });
+
+      params = this.getParams(this.params.mine);
+      getMine(params).then((resp) => {
+        if (resp.resultCode == 10) {
+          this.mine = resp.content;
+          for (let item of this.mine) {
+            item.src = `${item.courseImageType} ${item.courseImage}`;
+            item.authorSrc = `${item.authorImageType} ${item.authorImage}`;
+          }
+        } else {
+          this.mine = [];
+        }
+      });
+
+      setTimeout(async () => {
+        let params = this.getParams(this.params.half);
+        this.half = [];
+        getHalf(params)
+          .then((resp) => {
+            if (resp.resultCode == 10) {
+              this.half = resp.content;
+              for (let item of this.half) {
+                item.src = `${item.courseImageType} ${item.courseImage}`;
+                item.authorSrc = `${item.authorImageType} ${item.authorImage}`;
+              }
+            }
+            this.loading = false;
+          })
+          .catch((e) => {
+            this.loading = false;
+          });
+      }, 1000);
+    },
     onNav(val) {
-      const uri = `Course/${val.seq}`;
+      const uri = `/Course/${val.seq}`;
       this.$router.push(uri);
     },
   },
