@@ -32,8 +32,10 @@
 
       <v-col cols="12" md="6" sm="6" v-for="item in last" text>
         <v-card elevation="3" outlined @click="onNav(item)">
-          <v-img src="@/assets/lesson01_bg.png"> </v-img>
-          <v-img class="lesson_pic" :src="item.src"> </v-img>
+            <div class="lesson_wrap">
+                <v-img src="@/assets/lesson01_bg.png"> </v-img>
+                <v-img class="lesson_pic" :src="item.src"> </v-img>
+            </div>
 
           <v-card-title
             class="title blue-grey--text text--darken-2 font-weight-bold mb-1"
@@ -70,8 +72,10 @@
 
       <v-col cols="12" md="4" sm="6" v-for="item in half" text>
         <v-card elevation="3" outlined @click="onNav(item)">
+            <div class="lesson_wrap">
           <v-img src="@/assets/lesson01_bg.png"> </v-img>
           <v-img class="lesson_pic" :src="item.src"> </v-img>
+          </div>
           <v-card-title
             class="title blue-grey--text text--darken-2 font-weight-bold mb-1"
             >{{ item.courseName }}
@@ -118,8 +122,10 @@
 
       <v-col cols="12" md="4" sm="6" v-for="item in mine" text>
         <v-card elevation="3" outlined @click="onNav(item)">
-          <v-img src="@/assets/lesson01_bg.png"> </v-img>
-          <v-img class="lesson_pic" :src="item.src"> </v-img>
+            <div class="lesson_wrap">
+                <v-img src="@/assets/lesson01_bg.png"> </v-img>
+                <v-img class="lesson_pic" :src="item.src"> </v-img>
+            </div>
           <v-card-title
             class="title blue-grey--text text--darken-2 font-weight-bold mb-1"
             >{{ item.courseName }}
@@ -377,13 +383,21 @@ export default {
   }
 }
 
+.lesson_wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .lesson_pic {
-  position: absolute;
-  top: 8%;
-  left: 50%;
-  transform: translate(-50%, -8%);
-  width: 85%;
-  height: 50%;
+    position: absolute;
+    top: inherit;
+    left: inherit;
+    right: inherit;
+    bottom: inherit;
+    width: 90%;
+    height: 80%;
 }
 .banner {
   width: 100vw;
