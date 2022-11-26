@@ -3,8 +3,17 @@
     <v-overlay :value="loading">
       <v-progress-circular indeterminate color="primary"></v-progress-circular>
     </v-overlay>
-
     <Banner />
+    <v-alert
+      v-model="alert"
+      dense
+      border="left"
+      type="warning"
+      close-text="Close Alert"
+      dismissible
+    >
+      123</v-alert
+    >
     <!-- 最新上架 -->
     <v-row align="center" class="list-content">
       <v-col cols="12">
@@ -192,6 +201,7 @@ export default {
   },
   data: () => ({
     loading: false,
+    alert: false,
     params: {
       last: {
         currentPage: 1,
@@ -262,12 +272,27 @@ export default {
   async created() {
     // 已有驗證
     if (this.$route.params.token === undefined) {
-      const user = this.getUser();
-      if (user == null) {
+      if (this.$route.params.account == undefined) {
+        const user = this.getUser();
+        if (user == null) {
+          return;
+        }
+        this.onLoad();
         return;
       }
-      this.onLoad();
-      return;
+      // 重新登入
+
+      if (this.$route.params.account.length > 0) {
+        this.clear();
+        const resp = await getToken(
+          this.$route.params.account,
+          this.$route.params.password
+        );
+        if (resp.resultCode == 10) {
+          this.setUser(resp.content);
+          this.onLoad();
+        }
+      }
     }
     // from data
     // 驗證
@@ -282,21 +307,6 @@ export default {
         });
       }
     });
-
-    // 重新登入
-    if (this.$route.params.account.length > 0) {
-      this.clear();
-      await getToken(
-        this.$route.params.account,
-        this.$route.params.password
-      ).then((resp) => {
-        console.log(resp);
-        if (resp.resultCode == 10) {
-          this.setUser(resp.content);
-          this.onLoad();
-        }
-      });
-    }
   },
   async mounted() {},
   methods: {
