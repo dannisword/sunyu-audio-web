@@ -170,8 +170,9 @@ export default {
       this.loading = true;
       this.video.pause();
       this.appendix = val;
-    
-      this.loading = false;
+      setTimeout(() => {
+        this.loading = false;
+      }, 500);
     },
     onAction(val) {
       setViewHistoryEnd(this.viewHistory.seq).then((resp) => {});
