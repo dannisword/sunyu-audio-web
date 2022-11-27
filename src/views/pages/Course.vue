@@ -1,5 +1,8 @@
 <template>
   <v-container fluid class="pa-0">
+    <v-overlay :value="loading">
+      <v-progress-circular indeterminate color="primary"></v-progress-circular>
+    </v-overlay>
     <Banner></Banner>
     <div class="parallax-wrap">
       <v-row align="center" justify="center">
@@ -96,7 +99,9 @@ import {
   setViewHistory,
   getViewHistory,
   setViewHistoryEnd,
+  addViewLog,
 } from "@/api/course";
+import moment from "moment";
 
 export default {
   name: "Course",
@@ -107,9 +112,11 @@ export default {
   mixins: [pageMixin],
   data() {
     return {
+      loading: false,
       course: {},
       appendix: {},
       viewHistory: {},
+      startTime: "",
       videoPath: "",
       videoOptions: {
         autoplay: false,
@@ -125,6 +132,7 @@ export default {
     };
   },
   created() {
+    this.startTime = moment();
     this.onLoad();
   },
   computed: {
@@ -137,24 +145,33 @@ export default {
       if (oldVal.seq != undefined) {
         this.save(oldVal, this.video.currentTime());
       }
-
       this.setCurrentTime();
     },
   },
   methods: {
     onLoad: async function () {
-      getCourse(this.$route.params.Seq).then((resp) => {
-        this.course = resp;
-        console.log(resp)
-        this.appendix = this.course.appendiies[0];
+      this.loading = true;
+      getCourse(this.$route.params.Seq)
+        .then((resp) => {
+          this.course = resp;
+          this.appendix = this.course.appendiies[0];
+          this.course.teacherUrl = `${this.course.authorImageType} ${this.course.authorImage}`;
 
-        this.course.teacherUrl = `${this.course.authorImageType} ${this.course.authorImage}`;
-      });
+          setTimeout(() => {
+            this.loading = false;
+          }, 500);
+        })
+        .catch((e) => {
+          this.loading = false;
+        });
     },
     onChang: async function (val) {
       // 觀看紀錄
+      this.loading = true;
       this.video.pause();
       this.appendix = val;
+      aset;
+      this.loading = false;
     },
     onAction(val) {
       setViewHistoryEnd(this.viewHistory.seq).then((resp) => {});
@@ -192,6 +209,12 @@ export default {
   },
   async beforeDestroy() {
     await this.save(this.appendix, this.video.currentTime());
+    var data = {
+      courseSeq: this.course.seq,
+      appendixSeq: this.appendix.seq,
+      viewStartTime: this.startTime,
+    };
+    await addViewLog(data);
   },
 };
 </script>

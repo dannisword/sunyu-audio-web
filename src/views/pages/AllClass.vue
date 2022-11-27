@@ -4,16 +4,6 @@
       <v-progress-circular indeterminate color="primary"></v-progress-circular>
     </v-overlay>
     <Banner />
-    <v-alert
-      v-model="alert"
-      dense
-      border="left"
-      type="warning"
-      close-text="Close Alert"
-      dismissible
-    >
-      123</v-alert
-    >
     <!-- 最新上架 -->
     <v-row align="center" class="list-content">
       <v-col cols="12">
@@ -178,6 +168,19 @@
         </v-card>
       </v-col>
     </v-row>
+    <v-dialog v-model="dialog" width="500">
+      <v-card>
+        <v-card-title class="text-h5 grey lighten-2"> 提示訊息 </v-card-title>
+        <v-card-text class="m-1">
+          <h2>{{ message }}</h2>
+        </v-card-text>
+        <v-divider></v-divider>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="primary" text @click="dialog = false">確認</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -187,7 +190,7 @@ import {
   getHalf,
   getMine,
   getToken,
-  getUser,
+  getSignup,
   verifyToken,
 } from "@/api/course";
 import Banner from "../../components/Banner.vue";
@@ -201,7 +204,8 @@ export default {
   },
   data: () => ({
     loading: false,
-    alert: false,
+    dialog: false,
+    message: "",
     params: {
       last: {
         currentPage: 1,
@@ -219,18 +223,6 @@ export default {
     last: [],
     half: [],
     mine: [],
-    activities: [
-      {
-        id: 1,
-        mainTitle: "線上帶你學到會",
-        subTitle: "在線學習人數超過 30, 000",
-      },
-      {
-        id: 2,
-        mainTitle: "線上 24 小時內隨傳隨到",
-        subTitle: "學習不卡關",
-      },
-    ],
     teacherList: [
       {
         teacherID: 1,
@@ -270,9 +262,10 @@ export default {
     ],
   }),
   async created() {
-    // 已有驗證
+    // 未傳入 Token
     if (this.$route.params.token === undefined) {
       if (this.$route.params.account == undefined) {
+        // 已有驗證
         const user = this.getUser();
         if (user == null) {
           return;
@@ -281,7 +274,6 @@ export default {
         return;
       }
       // 重新登入
-
       if (this.$route.params.account.length > 0) {
         this.clear();
         const resp = await getToken(
@@ -295,7 +287,7 @@ export default {
       }
     }
     // from data
-    // 驗證
+    // 驗證 Token
     const data = {
       token: this.$route.params.token,
     };
@@ -323,6 +315,8 @@ export default {
           }
         } else {
           this.last = [];
+          this.dialog = true;
+          this.message = resp.message;
         }
       });
 
@@ -359,8 +353,16 @@ export default {
       }, 1000);
     },
     onNav(val) {
-      const uri = `/Course/${val.seq}`;
-      this.$router.push(uri);
+      // 檢查是否報名
+      getSignup(val.seq).then((resp) => {
+        if (resp.resultCode == 10) {
+          const uri = `/Course/${val.seq}`;
+          this.$router.push(uri);
+        } else {
+          this.dialog = true;
+          this.message = resp.message;
+        }
+      });
     },
   },
 };
@@ -370,10 +372,13 @@ export default {
 .deep-orange-border-bottom {
   border-bottom: 1px solid #e64a19 !important;
 }
-
+.container {
+  padding: 0px;
+}
 @media (min-width: 1904px) {
   .container {
     max-width: 1280px;
+    padding: 0px;
   }
 }
 

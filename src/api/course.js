@@ -45,6 +45,17 @@ export function getMine(params) {
   });
 }
 /**
+ * 我的課程
+ * @param {*} params
+ * @returns
+ */
+export function getSelf(params) {
+  return request({
+    url: `/v1/Course/Self${params}`,
+    method: "Get",
+  });
+}
+/**
  *
  * @param {*} seq
  * @returns
@@ -147,3 +158,28 @@ export function getMaps() {
     method: "GET",
   });
 }
+/**
+ *
+ * @param {*} params
+ * @returns
+ */
+export function getSignup(id) {
+  return request({
+    url: `/v1/CourseSignup?courseSeq=${id}`,
+    method: "GET",
+  });
+}
+/**
+ * 
+ * @param {*} courseSeq 
+ * @param {*} appendixSeq 
+ * @returns 
+ */
+export function addViewLog(data) {
+  return request({
+    url: `/v1/ViewLog`,
+    method: "POST",
+    data
+  });
+}
+
