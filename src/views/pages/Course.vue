@@ -170,7 +170,7 @@ export default {
       this.loading = true;
       this.video.pause();
       this.appendix = val;
-      aset;
+    
       this.loading = false;
     },
     onAction(val) {
