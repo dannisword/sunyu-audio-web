@@ -42,7 +42,7 @@ const router = new VueRouter({
         },
         {
           name: "MyClass",
-          path: "my-class",
+          path: "MyClass",
           meta: { title: "我的課程" },
           component: () => import("@/views/pages/MyClass"),
         },

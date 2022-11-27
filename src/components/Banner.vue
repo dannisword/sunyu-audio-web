@@ -50,7 +50,6 @@ export default {
       for (let item of this.activities) {
         item.imgSrc = `data:image/png;base64, ${item.image}`;
       }
-      console.log(this.activities);
     });
   },
 };

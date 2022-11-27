@@ -36,7 +36,7 @@ export default {
       {
         id: 2,
         title: "我的課程",
-        url: "/my-class",
+        url: "/MyClass",
       },
     ],
     href() {
