@@ -143,7 +143,7 @@ export default {
   watch: {
     appendix(newVal, oldVal) {
       if (oldVal.seq != undefined) {
-        this.save(oldVal, this.video.currentTime());
+        this.save(oldVal, this.video);
       }
       this.setCurrentTime();
     },
@@ -190,26 +190,30 @@ export default {
           return;
         }
         this.viewHistory = resp;
-        if (this.viewHistory.seq == 0) {
-          this.save(this.appendix, 0);
-        }
+
         this.video.src(this.videoPath);
         this.video.currentTime(resp.viewLastTime);
+
+        // 還沒紀錄
+        if (this.viewHistory.seq == 0) {
+          this.save(this.appendix, this.video);
+        }
       });
     },
-    save(appendix, second) {
+    save(appendix, video) {
       const data = {
         seq: 0,
         courseSeq: appendix.courseSeq,
         appendixSeq: appendix.seq,
-        viewLastTime: second,
+        viewLastTime: video.currentTime(),
+        viewDuration: video.duration(),
         deleteTag: 0,
       };
       setViewHistory(data).then((resp) => {});
     },
   },
   async beforeDestroy() {
-    await this.save(this.appendix, this.video.currentTime());
+    await this.save(this.appendix, this.video);
     var data = {
       courseSeq: this.course.seq,
       appendixSeq: this.appendix.seq,

@@ -47,7 +47,7 @@ export default {
     onNav(val) {
       this.$emit("onRoute");
       this.$router.push(val.url).catch((e) => {
-        //console.log(e);
+
       });
     },
   },

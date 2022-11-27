@@ -59,8 +59,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   window.document.title = to.meta.title;
-  //
-  //console.log(to);
+
   /*
   const exp = isExpiry();
   if (exp == true) {

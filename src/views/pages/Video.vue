@@ -65,11 +65,10 @@ export default {
     },
   },
   beforeDestroy() {
-    console.log("beforeDestroy");
-    console.log(this.play);
+  
   },
   destroyed() {
-    console.log("destroyed");
+
   },
 };
 </script>
