@@ -24,7 +24,7 @@ const router = new VueRouter({
         },
         {
           name: "AllClass",
-          path: "/AllClass",
+          path: "/AllClass/:token",
           meta: { title: "產業創新知識庫" },
           component: () => import("@/views/pages/AllClass"),
         },

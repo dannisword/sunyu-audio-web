@@ -206,7 +206,7 @@ export default {
         courseSeq: appendix.courseSeq,
         appendixSeq: appendix.seq,
         viewLastTime: video.currentTime(),
-        viewDuration: video.duration(),
+        //viewDuration: video.duration(),
         deleteTag: 0,
       };
       setViewHistory(data).then((resp) => {});

@@ -22,10 +22,10 @@
 
       <v-col cols="12" md="6" sm="6" v-for="item in last" text>
         <v-card elevation="3" outlined @click="onNav(item)">
-            <div class="lesson_wrap">
-                <v-img src="@/assets/lesson01_bg.png"> </v-img>
-                <v-img class="lesson_pic" :src="item.src"> </v-img>
-            </div>
+          <div class="lesson_wrap">
+            <v-img src="@/assets/lesson01_bg.png"> </v-img>
+            <v-img class="lesson_pic" :src="item.src"> </v-img>
+          </div>
 
           <v-card-title
             class="title blue-grey--text text--darken-2 font-weight-bold mb-1"
@@ -35,6 +35,7 @@
             <div class="d-flex align-center mx-0">
               <v-avatar size="56">
                 <img alt="user" :src="item.authorSrc" />
+                
               </v-avatar>
 
               <div class="text-subtitle-1 ms-4">{{ item.authorName }}</div>
@@ -62,9 +63,9 @@
 
       <v-col cols="12" md="4" sm="6" v-for="item in half" text>
         <v-card elevation="3" outlined @click="onNav(item)">
-            <div class="lesson_wrap">
-          <v-img src="@/assets/lesson01_bg.png"> </v-img>
-          <v-img class="lesson_pic" :src="item.src"> </v-img>
+          <div class="lesson_wrap">
+            <v-img src="@/assets/lesson01_bg.png"> </v-img>
+            <v-img class="lesson_pic" :src="item.src"> </v-img>
           </div>
           <v-card-title
             class="title blue-grey--text text--darken-2 font-weight-bold mb-1"
@@ -112,10 +113,10 @@
 
       <v-col cols="12" md="4" sm="6" v-for="item in mine" text>
         <v-card elevation="3" outlined @click="onNav(item)">
-            <div class="lesson_wrap">
-                <v-img src="@/assets/lesson01_bg.png"> </v-img>
-                <v-img class="lesson_pic" :src="item.src"> </v-img>
-            </div>
+          <div class="lesson_wrap">
+            <v-img src="@/assets/lesson01_bg.png"> </v-img>
+            <v-img class="lesson_pic" :src="item.src"> </v-img>
+          </div>
           <v-card-title
             class="title blue-grey--text text--darken-2 font-weight-bold mb-1"
             >{{ item.courseName }}
@@ -269,6 +270,7 @@ export default {
   }),
   async created() {
     // 未傳入 Token
+    console.log(this.$route.params);
     if (this.$route.params.token === undefined) {
       if (this.$route.params.account == undefined) {
         // 已有驗證
@@ -298,6 +300,7 @@ export default {
       token: this.$route.params.token,
     };
     verifyToken(data).then((resp) => {
+      console.log(resp);
       if (resp.resultCode == 10) {
         this.setUser(resp.content).then((resp) => {
           this.onLoad();
@@ -389,20 +392,20 @@ export default {
 }
 
 .lesson_wrap {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .lesson_pic {
-    position: absolute;
-    top: inherit;
-    left: inherit;
-    right: inherit;
-    bottom: inherit;
-    width: 90%;
-    height: 80%;
+  position: absolute;
+  top: inherit;
+  left: inherit;
+  right: inherit;
+  bottom: inherit;
+  width: 90%;
+  height: 80%;
 }
 .banner {
   width: 100vw;

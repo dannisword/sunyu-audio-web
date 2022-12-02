@@ -43,10 +43,10 @@
               <v-progress-linear
                 color="lime"
                 height="15"
-                v-model="item.value"
+                v-model="item.scale"
                 striped
               >
-                <strong>{{ Math.ceil(item.value) }}%</strong>
+                <strong>{{ Math.ceil(item.scale) }}%</strong>
               </v-progress-linear>
             </div>
           </v-card-text>

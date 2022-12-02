@@ -77,7 +77,7 @@ export default {
         name: val.path,
         params: {
           token:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ7XCJVc2VyU2VxXCI6MyxcIlVzZXJXb3JrTnVtXCI6XCJBMDAxXCIsXCJVc2VyTmFtZVwiOlwiYWFhXCIsXCJVc2VyQWNjb3VudFwiOlwiYW5pdGFcIixcIlVzZXJSb2xlXCI6MyxcIlVzZXJNb2JpbGVcIjpcIjA5MTIxMTIzMTJcIixcIkV4dGVuc2lvblwiOlwiXCIsXCJVc2VyTWFpbFwiOlwiYW5pdGFAdGVzdC5jbVwiLFwiVXNlclVuaXRcIjoxMyxcIlVzZXJKb2JUaXRsZVwiOjE0LFwiTWFuYWdlbWVudFwiOjAsXCJTdHJhdFdvcmtEYXlcIjpcIjIwMjItMDktMDFUMDA6MDA6MDBcIixcIkNyZWF0RGF0ZVwiOlwiMjAyMi0xMS0wMlQyMDo0NDo1N1wiLFwiQ3JlYXRVc2VyXCI6MSxcIklzQWN0aXZlXCI6MSxcIkRlbGV0ZVRhZ1wiOjAsXCJUb2tlblwiOm51bGwsXCJFeHBpcmF0aW9uXCI6bnVsbH0iLCJqdGkiOiI2MjNkMjYyNy1jYjMwLTRkYjItYjQzNS0xNTUwMTFjMDI3YjUiLCJuYmYiOjE2NjkyNzk2MDEsImV4cCI6MTY2OTM2NjAwMSwiaWF0IjoxNjY5Mjc5NjAxLCJpc3MiOiJTdW55dSJ9.2fLUMdwkykQBb2njLZRNm6FPgWRB7mIirA5PPb6ml1A",
+            "",
         },
       });
     },
